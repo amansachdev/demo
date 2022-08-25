@@ -1,0 +1,282 @@
+
+.tableMenuGroupBySection {
+  width: 100%;
+  height: 100%;
+  background: #FFFFFF;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3), 0px 0px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  padding: 30px 0px 20px 20px;
+  margin-top: -2px
+}
+
+.tableMenuGroupBySection .tableMenuGroupBySectionMinHeight {
+  min-height: 30px;
+  max-height: 300px;
+  overflow: auto
+}
+
+.tableMenuGroupBySection .tableMenuGroupBySectionMinHeight div.groupByMainSection:first-child {
+  margin-top: 0px
+}
+
+.tableMenuGroupBySection .tableMenuGroupBySectionMinHeight div.groupByMainSection {
+  margin-top: 20px
+}
+
+.tableMenuGroupBySection .groupBySelectedIcon {
+  position: absolute;
+  top: 11px;
+  left: 10px
+}
+
+.tableMenuGroupBySection .groupBySelectedValueSection input {
+  cursor: pointer;
+  position: relative
+}
+
+.tableMenuGroupBySection .groupBySelectedData {
+  width: 210px;
+  height: 35px;
+  background: rgba(51, 75, 250, 0.2);
+  color: #334BFA;
+  border-radius: 2px;
+  padding: 0 30px;
+  border: 1.5px solid transparent;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tableMenuGroupBySection .groupBySelectedValueSection input:focus {
+  background: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  padding: 9px 10px;
+  color: #3c3c3c
+}
+
+.tableMenuGroupBySection .groupByDropdownIcon {
+  margin-top: -28px;
+  margin-left: 182px
+}
+
+.resetToDefault[disabled] {
+  color: rgba(60, 60, 60, 0.5) !important;
+  cursor: no-drop !important
+}
+
+.resetToDefault[disabled]:hover {
+  background: #FFFFFF !important;
+  color: rgba(60, 60, 60, 0.5) !important
+}
+
+.groupByColumnNameDropDownSection {
+  width: 210px;
+  max-height: 300px;
+  overflow: auto;
+  background: #FFFFFF;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3), 0px 0px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 0px 0px 5px 5px;
+  margin-top: 36px;
+  margin-left: 0px;
+  /*padding: 15px 0px;*/
+  position: absolute;
+  left: 118px
+}
+
+.groupByColumnNameDropDownSection .groupByColumnNameFilterItem {
+  box-shadow: none;
+  background: transparent;
+  padding: 5px 10px 5px 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
+.groupByColumnNameDropDownSection .groupByColumnNameFilterItem:hover {
+  background: rgba(51, 75, 250, 0.2);
+  color: #334BFA
+}
+
+.groupByColumnNameDropDownSection .groupByColumnNameFilterItem:hover span {
+  color: #334BFA
+}
+
+.groupByColumnNameDropDownSection .groupByColumnNameFilterItem i {
+  line-height: 0px
+}
+
+.groupByColumnNameDropDownSection::-webkit-scrollbar {
+  width: 4px;
+  border-radius: 5px;
+  height: 9px
+}
+
+.groupByColumnNameDropDownSection::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 3px
+}
+
+.groupByColumnListError {
+  width: 210px;
+  box-shadow: none;
+  background: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  border-radius: 0px 0px 5px 5px;
+  padding: 20px 0px;
+  cursor: context-menu;
+  min-height: 80px;
+  height: auto;
+  overflow: auto;
+  border-top: none;
+  position: absolute;
+  left: 118px;
+  top: 65px
+}
+
+.groupByColumnListError .invalidSearchResult {
+  width: 200px;
+  margin: 0 auto;
+  padding: 0px 10px
+}
+
+.groupByColumnListError .invalidSearchResult p {
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
+.groupByLetterMainSection {
+  width: 249px;
+  height: 35px;
+  border: 1px solid #334BFA;
+  border-radius: 3px;
+  padding: 7px 15px 7px 15px
+}
+
+.groupByLetterMainSection .groupByLetterButton {
+  font-family: SFUIText-Regular;
+  font-size: 12px;
+  color: #3C3C3C;
+  width: 100px;
+  height: 20px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 2px
+}
+
+.groupByLetterMainSection .groupByLetterButton:hover {
+  color: #334BFA;
+  width: 100px;
+  height: 20px;
+  background: rgba(51, 75, 250, 0.2);
+  border-radius: 2px
+}
+
+.groupByLetterMainSection .groupByLetterButton.active {
+  color: #FFFFFF;
+  width: 100px;
+  height: 20px;
+  background: #334BFA;
+  border: 1px solid #334BFA;
+  box-sizing: border-box;
+  border-radius: 2px
+}
+
+.bottomButtonSection .groupByButton {
+  font-family: SFUIText-Regular;
+  font-size: 14px;
+  line-height: 12px;
+  width: 90px;
+  height: 25px;
+  color: #3c3c3c;
+  border: none;
+  background: transparent;
+  padding: 0px;
+  border-radius: 2px
+}
+
+.tableMenuGroupBySection .customFieldBlueButton {
+  color: #FFFFFF !important;
+  background-color: #334BFA !important;
+  border: none !important;
+  cursor: pointer;
+  box-shadow: none !important;
+  border-radius: 5px;
+  width: 82px;
+  height: 35px;
+  min-width: 80px;
+  font-size: 14px;
+  line-height: 14px;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+  outline: none
+}
+
+.tableMenuGroupBySection .customFieldBlueButton:hover {
+  box-shadow: 0 0.25em 0.75em rgba(0, 156, 255, .5) !important
+}
+
+.tableMenuGroupBySection .customFieldBlueButton:disabled {
+  color: #FFFFFF !important;
+  background-color: #CCCCCC !important;
+  border: none !important;
+  cursor: no-drop;
+  box-shadow: none !important;
+  width: 82px;
+  height: 35px;
+  min-width: 80px;
+  border-radius: 5px;
+  font-size: 14px;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+  outline: none
+}
+
+.tableMenuGroupBySection .customFieldBlueButton:disabled:hover {
+  box-shadow: none !important
+}
+
+.tableMenuGroupBySection .buttonLoaderSection {
+  display: inline-flex;
+  line-height: 33px;
+  margin-left: -11px
+}
+
+.tableMenuGroupBySection.buttonLoaderSection .loaderImage {
+  width: 28px;
+  height: 28px;
+  margin-top: -1px;
+  margin-left: -11px
+}
+
+.tableMenuGroupBySection .loaderImage img {
+  width: 28px
+}
+
+.bottomButtonSection .resetToDefault {
+  width: 107px
+}
+
+.bottomButtonSection .groupByButton:hover {
+  background: rgba(51, 75, 250, 0.2);
+  color: #334BFA
+}
+
+.bottomButtonSection .groupByButton.disabled {
+  color: #3C3C3C;
+  opacity: 0.5
+}
+
+.bottomButtonSection .groupByButton.disabled:hover {
+  background: transparent;
+  cursor: no-drop
+}
+
+.groupByColumnNameDropDownSection .dataLists:first-child {
+  padding-top: 15px;
+}
+
+.groupByColumnNameDropDownSection .dataLists:last-child {
+  padding-bottom: 15px;
+}

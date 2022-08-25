@@ -1,0 +1,449 @@
+.tableHeaderLeftSection {
+  background: #F1F1F1;
+  width: 280px;
+  padding: 15px 130px 0px 30px;
+  margin-left: 70px;
+  text-align: left;
+  height: 81px;
+  transition: all 0.5s ease 0s
+}
+
+.tableHeaderLeftSection h1 {
+  margin-left: 0px;
+  font-family: SFUIText-Bold !important;
+  color: #3C3C3C;
+  font-size: 30px;
+  line-height: 36px;
+  margin-bottom: 0px;
+  letter-spacing: -1px;
+}
+
+.tableHeaderRightSection {
+  border-bottom: 1px solid #CCCCCC;
+  width: -webkit-fill-available;
+  max-width: 1470px;
+  padding: 21px 0px 21px 0px;
+  margin-left: 50px;
+  margin-right: 50px;
+  transition: all 0.5s ease 0s
+}
+
+.mainPaddingSection {
+  /*padding: 0px 50px 0px 15px;*/
+  padding: 0px 0px 0px 15px;
+  margin-left: 55px;
+  /*overflow: auto;*/
+  /*height: calc(100vh - 81px);*/
+  /*width: calc(100vw - 165px);*/
+}
+
+.segmentScrollSection {
+  overflow: auto;
+  height: calc(100vh - 80px);
+  width: calc(100vw - 170px);
+  background: #F1F1F1
+}
+
+.segmentMainSection .segmentLeftMainSection {
+  background: #F1F1F1;
+  /*height: 100%;*/
+  min-height: calc(100vh - 81px);
+  min-width: 280px;
+  width: 280px;
+  max-width: 280px;
+  padding: 12px 12px 0px 12px;
+  position: relative;
+  left: 0;
+  /*transform: translate3d(-100%, 0px, 0px);*/
+  visibility: visible;
+  transition: all 0.5s ease 0s;
+  -webkit-transition: all 0.5s ease 0s;
+}
+
+.segmentMainSection .leftSegmentInput input {
+  font-size: 12px;
+  width: 240px;
+  height: 35px;
+  color: #3C3C3C;
+  background: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  padding: 10px 30px 10px 10px;
+  border-radius: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
+.segmentMainSection .segmentTitle {
+  color: rgba(60, 60, 60, 0.7)
+}
+
+.segmentLeftMainSection .leftSegmentSubSection .displayFlex:hover span {
+  color: #334BFA
+}
+
+.blueButton {
+  width: 255px;
+  height: 35px;
+  border: 1px solid #334BFA;
+  background: #334BFA;
+  border-radius: 5px;
+  color: #FFFFFF;
+  padding: 0px 10px 0px 18px
+}
+
+.blueButton:hover {
+  box-shadow: 0px 5px 5px rgba(51, 75, 250, 0.25)
+}
+
+.rightSectionSegment {
+  width: 80px;
+  height: 80px;
+  margin-left: 50px;
+  margin-bottom: 50px
+}
+
+.rightSectionSegment .addNewTableDiv {
+  width: 80px;
+  height: 80px;
+  background: #FFFFFF;
+  border: 2px solid rgba(60, 60, 60, 0.7);
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding: 30px 27px 25px 30px
+}
+
+.rightSectionSegment .addNewTableDiv:hover {
+  border: 2px solid #334BFA;
+  box-shadow: 0px 5px 5px rgba(51, 75, 250, 0.25)
+}
+
+.segmentRightMainSection {
+  background: #FFFFFF;
+  /*width: 100%;*/
+  /*height: calc(95vh - 20px);*/
+  padding-top: 20px;
+  padding-left: 46px;
+  overflow: auto;
+  height: calc(100vh - 110px);
+  width: 100%;
+  transition: all 0.5s ease 0s
+  /*width: calc(70vw - 75px);*/
+}
+
+.segmentRightMainSection .rightSegmentList .selectedSegmentList {
+  min-height: 260px
+}
+
+.rightSectionSegment .addedSegment {
+  width: 80px;
+  height: 80px;
+  background: #FFFFFF;
+  border: 2px solid rgba(60, 60, 60, 0.7);
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.rightSectionSegment .addedSegmentTitle {
+  margin-left: 0px
+}
+
+.rightSectionSegment.hoverBlueDiv:hover .addedSegment {
+  border: 2px solid #334BFA !important
+}
+
+.rightSectionSegment.hoverBlueDiv:hover .addedSegmentTitle {
+  color: #334BFA
+}
+
+.segmentSelectedTypeList {
+  /*display: grid;
+  grid-template-columns: auto auto auto;
+  column-gap: 50px;*/
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 50px
+}
+
+.segmentSelectedTypeList .displayFlex:hover span {
+  color: #334BFA
+}
+
+.segmentSelectedTypeList.displayFlex .segmentSelectedTypeListLeft .displayFlex.cursorPointer.widthFitContent {
+  /*width: 237px;*/
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-right: 50px
+}
+
+.segmentSelectedTypeList.displayFlex .segmentSelectedTypeListLeft .listViewSegmentList {
+  /*width: 150px;*/
+  max-width: 320px;
+  min-width: 320px;
+}
+
+.segmentMainClass .segmentLabel input {
+  width: 100%;
+  height: 40px;
+  color: #3C3C3C;
+  background: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  padding: 10px 10px 10px 10px;
+  border-radius: 5px
+}
+
+.segmentMainClass .segmentDescription.segmentLabel textarea {
+  width: 100%;
+  height: 120px;
+  color: #3C3C3C;
+  background: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  padding: 10px 10px 10px 10px;
+  border-radius: 5px;
+  resize: none
+}
+
+.tableMainClass .tableLabel input {
+  width: 100%;
+  height: 40px;
+  color: #3C3C3C;
+  background: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  padding: 10px 10px 10px 10px;
+  border-radius: 5px
+}
+
+.selectIconDiv {
+  width: 100%;
+  height: 40px;
+  color: #3C3C3C;
+  background: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  padding: 10px 10px 10px 10px;
+  border-radius: 5px
+}
+
+.selectIconDiv:hover {
+  border: 2px solid #334BFA;
+}
+
+.selectIconDiv .selectedEmojiIcon {
+  position: absolute;
+  top: 7px;
+  left: 6px;
+}
+
+.selectIconDiv .dropDownIcon {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+}
+
+.selectIconDiv:hover .selectedEmojiIcon {
+  top: 6px;
+  left: 5px;
+}
+
+.selectIconDiv:hover .dropDownIcon {
+  top: 7px;
+  right: 9px;
+}
+
+.selectIconDiv.activeEmojiDDM {
+  border: 2px solid #334BFA;
+}
+
+.selectIconDiv.activeEmojiDDM .selectedEmojiIcon {
+  position: absolute;
+  top: 5px;
+  left: 6px;
+}
+
+.selectIconDiv.activeEmojiDDM .dropDownIcon {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+}
+
+.selectIconDiv.activeEmojiDDM:hover .selectedEmojiIcon {
+  top: 4px;
+  left: 5px;
+}
+
+.selectIconDiv.activeEmojiDDM:hover .dropDownIcon {
+  top: 7px;
+  right: 9px;
+}
+
+.selectIconDiv.activeEmojiDDM:hover .selectedEmojiIcon {
+  top: 5px;
+  left: 6px;
+}
+
+.selectIconDiv.activeEmojiDDM:hover .dropDownIcon {
+  top: 8px;
+  right: 10px;
+}
+
+.selectColorDiv {
+  width: 100%;
+  height: 40px;
+  color: #3C3C3C;
+  background: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  padding: 10px 10px 10px 10px;
+  border-radius: 5px
+}
+
+.selectColorDiv:hover {
+  border: 2px solid #334BFA;
+}
+
+.selectColorDiv .selectedColorIcon {
+  position: absolute;
+  top: 5px;
+  left: 6px;
+}
+
+.selectColorDiv .dropDownIcon {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+}
+
+.selectColorDiv:hover .selectedColorIcon {
+  top: 4px;
+  left: 5px;
+}
+
+.selectColorDiv:hover .dropDownIcon {
+  top: 7px;
+  right: 9px;
+}
+
+.selectColorDiv.activeColorDDM {
+  border: 2px solid #334BFA;
+}
+
+.selectColorDiv.activeColorDDM .selectedColorIcon {
+  position: absolute;
+  top: 5px;
+  left: 6px;
+}
+
+.selectColorDiv.activeColorDDM .dropDownIcon {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+}
+
+.selectColorDiv.activeColorDDM:hover .selectedColorIcon {
+  top: 4px;
+  left: 5px;
+}
+
+.selectColorDiv.activeColorDDM:hover .dropDownIcon {
+  top: 7px;
+  right: 9px;
+}
+
+.selectColorDiv.activeColorDDM:hover .selectedColorIcon {
+  top: 5px;
+  left: 6px;
+}
+
+.selectColorDiv.activeColorDDM:hover .dropDownIcon {
+  top: 8px;
+  right: 10px;
+}
+
+.tableMainClass .tableColor.tableLabel .selectedTableColorInput {
+  width: 85px;
+  height: 35px;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer
+}
+
+.leftSegmentMinHeight {
+  max-height: 580px;
+  overflow: auto;
+}
+
+.rightSegmentList .selectedSegmentList .selectedSegmentData.gridViewActive:first-child {
+  margin-top: 0px;
+}
+
+.rightSegmentList .selectedSegmentList .selectedSegmentData.gridViewActive {
+  margin-top: 75px;
+}
+
+.rightSegmentList .selectedSegmentList .selectedSegmentData.listViewActive:first-child {
+  margin-top: 0px;
+}
+
+.rightSegmentList .selectedSegmentList .selectedSegmentData.listViewActive:last-child {
+  margin-bottom: 70px;
+}
+
+.rightSegmentList .selectedSegmentList .selectedSegmentData.listViewActive {
+  margin-top: 75px;
+  min-height: 80px
+}
+
+.selectTableColor {
+  position: absolute;
+  z-index: 99;
+  width: 240px;
+  min-height: 100px;
+  height: auto;
+  background: #fff;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 5px;
+  display: flex;
+  padding: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  transform: rotate(0deg);
+  margin-top: -3px;
+  margin-left: 0;
+  margin-bottom: 30px
+}
+
+.tableColorPicker {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  background-color: #fff;
+  padding: 20px 5px 20px 15px;
+  width: 100%
+}
+
+.tableSingleColor {
+  padding: 5px 3px 5px 4px;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 5px
+}
+
+.tableSingleColor:hover {
+  background: rgba(51, 75, 250, 0.2);
+  border-radius: 5px
+}
+
+.clearSegmentSearch .segmentInputClear {
+  top: 7px;
+  right: 20px
+}
+
+.gridViewTitle {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  /*width: fit-content;*/
+}

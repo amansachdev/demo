@@ -1,0 +1,34 @@
+<div class="mainPageTopWrapper">
+  <div class="topNavigationBar mb-35"> </div>
+  <div class="topNavigationBarLink textAlignCenter" [ngClass]="{'activeHeader': isActive}">
+    <a class="navigationBatItem interRegularFont fontSize16 darkBlack onHoverBlue active"> Home </a>
+    <a class="navigationBatItem interRegularFont fontSize16 darkBlack onHoverBlue"> Features </a>
+    <a class="navigationBatItem interRegularFont fontSize16 darkBlack onHoverBlue"> How it Works </a>
+    <a class="navigationBatItem interRegularFont fontSize16 darkBlack onHoverBlue"> Pricing </a>
+    <a class="navigationBatItem interRegularFont fontSize16 darkBlack onHoverBlue textAlignRight"> Sign in </a>
+  </div>
+</div>
+<div class="mainPageWrapper">
+  <div class="mainPageSection positionRelative">
+    <div class="positionRelative">
+      <div class="mainBodyTextContent textAlignCenter">
+        <div class="centerMainTextTitle interBoldFont darkBlack mb-40"> Supercharge Your Outreach </div>
+        <div class="centerSubTextTitle interRegularFont fontSize20 darkBlack mb-40">
+          Find the email address of most relevant prospects for your business and company details at scale. Get enriched
+        </div>
+        <div class="homePageButtonSection displayFlex">
+          <button class="blueSaveButton mr-75">
+            <div class="buttonLoaderSection">
+              <app-spinner class="loaderImage mt-0 ml--5" *ngIf="isLoading"></app-spinner>
+              <span class="mediumFont"> Get Started </span>
+            </div>
+          </button>
+          <button class="cancelBlackButton ml-15">
+            <span class="mediumFont"> Use Cases </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

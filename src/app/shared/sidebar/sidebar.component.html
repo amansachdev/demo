@@ -1,0 +1,60 @@
+<!--Sidebar Design Section Starts-->
+<div class="asidebar">
+  <div class="tableSidebar">
+    <div class="tableSidebarTop">
+      <div class="tableSidebarContent mb-30">
+        <div class="sidebarDataImage cursorPointer">
+          <!--<app-icon [name]="'dataBaseGray'" [nameOnHover]="'dataBaseBlue'"></app-icon>-->
+        </div>
+      </div>
+      <div class="tableSidebarContent mb-30">
+          <span class="sidebarCampaignImage cursorPointer">
+            <!--<app-icon [name]="'campaignGray'" [nameOnHover]="'campaignBlue'"></app-icon>-->
+          </span>
+      </div>
+      <div class="tableSidebarContent mb-30">
+          <span class="sidebarInboxImage cursorPointer">
+            <!--<app-icon [name]="'inboxGray'" [nameOnHover]="'inboxBlue'"></app-icon>-->
+          </span>
+      </div>
+      <div class="tableSidebarContent mb-30">
+          <span class="sidebarLeadImage cursorPointer">
+            <!--<app-icon [name]="'leadManagerGray'" [nameOnHover]="'leadManagerBlue'"></app-icon>-->
+          </span>
+      </div>
+      <div class="tableSidebarContent mb-30">
+          <span class="sidebarAutomationImage cursorPointer">
+            <!--<app-icon [name]="'automationGray'" [nameOnHover]="'automationBlue'"></app-icon>-->
+          </span>
+      </div>
+      <div class="tableSidebarContent mb-30">
+          <span class="sidebarReportImage cursorPointer">
+            <!--<app-icon [name]="'reportGray'" [nameOnHover]="'reportBlue'"></app-icon>-->
+          </span>
+      </div>
+    </div>
+    <div class="tableSidebarBottom">
+      <div class="tableSidebarContent mb-20">
+          <span class="sidebarBillingImage cursorPointer">
+            <!--<app-icon [name]="'billingGray'" [nameOnHover]="'billingBlue'"></app-icon>-->
+          </span>
+      </div>
+      <div class="tableSidebarContent mb-30">
+          <span class="sidebarAppImage cursorPointer">
+            <!--<app-icon [name]="'appStoreGray'" [nameOnHover]="'appStoreBlue'"></app-icon>-->
+          </span>
+      </div>
+      <div class="tableSidebarContent position_relative">
+          <span class="sidebarUserImage cursorPointer">
+            <!--<img [src]="profile" alt="User Profile" nz-dropdown nzTrigger="click" [nzDropdownMenu]="userprofile">-->
+          </span>
+        <span class="userOnlineState"> <img src="assets/table/online.svg"> </span>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Sidebar Design Section Ends-->
+
+<nz-dropdown-menu #userprofile="nzDropdownMenu">
+  <app-user-profile-ddm></app-user-profile-ddm>
+</nz-dropdown-menu>

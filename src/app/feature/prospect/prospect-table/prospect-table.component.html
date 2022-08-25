@@ -1,0 +1,45 @@
+<div class="leftSideBarSection cursorPointer" *ngIf="!tableMenuService.isFullScreen"
+     nz-tooltip nzTooltipTitle="Home Screen" nzTooltipPlacement="top"
+     [nzTooltipOverlayClassName]="'sideBarTooltip'" [nzTooltipTrigger]="'hover'">
+  <a [href]="'/prospect'"><i [inlineSVG]="'assets/table/homeIconSmallGray.svg'"></i></a>
+
+</div>
+
+<div class="displayFlex" *ngIf="!tableMenuService.isFullScreen">
+  <div class="tableHeaderLeftSection displayFlex">
+    <ngx-emoji class="mt-4" [set]="'google'" [emoji]="selectedTable.emoji" size="30" skin="1"></ngx-emoji>
+    <h1> {{selectedTable.name}} </h1>
+  </div>
+  <div class="displayFlex tableHeaderRightSection">
+    <app-header></app-header>
+  </div>
+</div>
+
+<app-table-menus #tableMenusComponent (rerenderHotTable)="tableMenuService.rerenderHotTable()" *ngIf="prospectColumn.length > 0"></app-table-menus>
+
+<div class="prospectSectionMainTableWrapper prospectTableSectionWrapperWithMenu" id="prospectTableSection"
+     *ngIf="prospectColumn.length>0 && tableMenuService.showTableView"
+     [ngClass]="{'tableMenuFullScreen': tableMenuService.isFullScreen,
+     'tableRowShort': tableMenuService.rowHeight.short,
+     'tableRowMedium': tableMenuService.rowHeight.medium,
+     'tableRowTall': tableMenuService.rowHeight.tall,
+     'tableRowExtraTall': tableMenuService.rowHeight.extraTall,
+     'wrapViewEnabled': tableMenuService.isWrapCellsEnabled,
+     'noDataToLoad': tableMenuService.dataLoaded, 'dataToLoad': !tableMenuService.dataLoaded}">
+
+  <app-skeleton class="skeletonTableMainSection"
+                *ngIf="showSkeletonDesign">
+  </app-skeleton>
+
+  <app-hands-on-table *ngIf="showTableDesign" [hotId]="'hotInstance'" (hideField)="hideField($event)"
+                      (showFilter)="showFilter($event)"
+                      [colSet]="prospectService.prospectColumn"
+                      [dataSet]="prospectService.prospectDataSet">
+  </app-hands-on-table>
+</div>
+
+<app-group-by *ngIf="tableMenuService.showGroupByComponent"
+              [ngClass]="{'fullViewGroupByComponent': tableMenuService.isFullScreen}"></app-group-by>
+
+
+

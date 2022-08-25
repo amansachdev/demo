@@ -1,0 +1,156 @@
+<hot-table class="hot regularFont fontSize14 lineHeight18 mainBlack"
+           id="hotTableId"
+           width="100%"
+           height="100%"
+           [tableClassName]="'prospectTableMainClass'"
+           [settings]="hotSetting"
+           [hotId]="hotId"
+           [hiddenColumns]="{columns: tableMenuService.hiddenColumns}"
+           [fixedColumnsLeft]="2"
+           [data]="dataSet"
+           [ngClass]="{'noDataFoundMainSection': dataSet.length == 0,
+           'customCheckBox': prospectService.isCheckboxActive}">
+
+  <ng-container *ngFor="let column of colSet; let i = index;trackBy: trackByFn" [ngSwitch]="column.type">
+    <hot-column *ngSwitchCase="'checkbox'"
+                [type]="'checkbox'"
+                [className]="'checkBoxTD'"
+                [renderer]="checkBoxRenderer"
+                [data]="column.field"
+                (click)="checkBoxClicked()"></hot-column>
+
+    <hot-column *ngSwitchCase="'textonly'"
+                [type]="'text'"
+                [data]="column.field"
+                [colWidths]="column.width"
+                [renderer]="validatorRenderer"
+                [className]="'textTd'"
+                [validator]="textValidator"
+                [title]="prospectService.getSVGIcon(column.field)+'&nbsp;'+column.title"></hot-column>
+
+    <hot-column *ngSwitchCase="'text'"
+                [type]="'text'"
+                [data]="column.field"
+                [colWidths]="column.width"
+                [className]="'textTd'"
+                [title]="prospectService.getSVGIcon(column.field)+'&nbsp;'+column.title"></hot-column>
+
+    <hot-column *ngSwitchCase="'email'"
+                [type]="'text'"
+                [data]="column.field"
+                [colWidths]="column.width"
+                [className]="'emailTd'"
+                [renderer]="validatorRenderer"
+                [validator]="emailValidator"
+                [title]="prospectService.SVGIcon.email+'&nbsp;'+column.title"></hot-column>
+
+    <hot-column *ngSwitchCase="'url'"
+                [type]="'text'"
+                [data]="column.field"
+                [colWidths]="column.width"
+                [className]="'urlTd'"
+                [renderer]="validatorRenderer"
+                [validator]="urlValidator"
+                [title]="prospectService.SVGIcon.url+'&nbsp;'+column.title"></hot-column>
+
+    <hot-column *ngSwitchCase="'number'"
+                [type]="'numeric'"
+                [data]="column.field"
+                [colWidths]="column.width"
+                [className]="'numberTd'"
+                [renderer]="validatorRenderer"
+                [title]="prospectService.getSVGIcon(column.field)+'&nbsp;'+column.title"></hot-column>
+
+    <hot-column *ngSwitchCase="'date'"
+                [type]="'date'"
+                [data]="column.field"
+                [colWidths]="column.width"
+                [className]="'dateTd'"
+                [correctFormat]="true"
+                [renderer]="validatorRenderer"
+                [readOnly]="true"
+                [dateFormat]="'DD/MM/YY HH:MM:SS'"
+                [title]="prospectService.SVGIcon.date+'&nbsp;'+column.title"></hot-column>
+
+    <hot-column *ngSwitchCase="'singleSelectTag'"
+                [data]="column.field"
+                [colWidths]="column.width"
+                [readOnly]="true"
+                [title]="prospectService.SVGIcon.tag+'&nbsp;'+column.title"
+                [renderer]="singleSelectTagsRenderer"
+                [className]="'singleSelectTd'"></hot-column>
+
+    <hot-column *ngSwitchCase="'multiSelectTag'"
+                [data]="column.field"
+                [colWidths]="column.width"
+                [readOnly]="true"
+                [title]="prospectService.SVGIcon.multiSelect+'&nbsp;'+column.title"
+                [renderer]="multiSelectTagsRenderer"
+                [className]="'singleSelectTd'"></hot-column>
+
+    <hot-column *ngSwitchCase="'multiLineText'"
+                [data]="column.field"
+                [colWidths]="column.width"
+                [readOnly]="true"
+                [type]="'text'"
+                [className]="'multiLineTextTd'"
+                [renderer]="multiLineTextRenderer"
+                [title]="prospectService.SVGIcon.text+'&nbsp;'+column.title"></hot-column>
+
+  </ng-container>
+
+</hot-table>
+
+<div class="noDataFoundSection" *ngIf="dataSet.length === 0">
+    <nz-empty></nz-empty>
+</div>
+
+<div class="noDataFoundSection" *ngIf="prospectService.isFilterLoading && dataSet.length !== 0"> loading....</div>
+
+<div class="displayNone" #overlayDomEl
+     *ngIf="colIndex == prospectService.currentHotCol && dataIndex == prospectService.currentHotRow">
+  <div *ngIf="col.type == 'singleSelectTag' || col.type == 'multiSelectTag'" class="customTagsDropDown placeHolder">
+    <input #tagsInputEl name="fieldName" type="text" autofocus placeholder="Type to search" [autocomplete]="false"
+           (keydown.enter)="onCreateNewTag(searchTag)"
+           [(ngModel)]="searchTag" (ngModelChange)="onChangeSearchTag(searchTag)">
+    <div class="selectedTags" *ngIf="prospectService.allTagOptions[col.field].length > 0">
+      <div class="customTagSection cursorPointer"
+           *ngFor="let tag of prospectService.allTagOptions[col.field] | arrayFilter: searchTag; let tagIndex = index;"
+           ngDefaultControl
+           (click)="onSelectTag(tag); $event.stopPropagation()">
+        <div class="customSelectedTag" [appTagColor]="tag"><span class="customSingleSelectedTag"> {{tag}} </span></div>
+      </div>
+    </div>
+    <div *ngIf="invalidTagSearch" class="invalidTagSearch addNewTag">
+      <p> Press enter to create "{{searchTag}}" as an option </p>
+    </div>
+    <div *ngIf="prospectService.allTagOptions[col.field] && prospectService.allTagOptions[col.field].length == 0 && showNoTagsMsg" class="addNewTags">
+      <p> Oops! You have not added any option,
+        <span class="mainBlue cursorPointer" (click)="tagsInputEl.focus(); showNoTagsMsg=false"> click here </span>
+        to add options.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Right Click Menu Rename Option Drop Down Section Starts -->
+<div class="htMenu handsontable renameMainWrapper renameFieldSection" *ngIf="isRenameDDMVisible" #renameEl>
+  <div class="positionRelative">
+    <input type="text" class="renameInputField whiteSpaceNoWrap overflowHidden textEllipsis" [autofocus]="true"
+           [(ngModel)]="this.col.title">
+    <div class="renameButtonSection mt-50">
+      <div class="displayInlineFlex">
+        <button class="renameFieldSaveButton" (click)="renameField()">
+          <div class="buttonLoaderSection">
+            <app-spinner class="loaderImage mt-0 ml--5" *ngIf="isLoading"></app-spinner>
+            <span class="regularFont"> Save </span>
+          </div>
+        </button>
+        <div class="mainCancelButton pt-7 ml-10">
+            <span class="cursorPointer regularFont fontSize14 lineHeight17 mainBlack"
+                  (click)="isRenameDDMVisible = false; cancelRename()"> Cancel </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Right Click Menu Rename Option Drop Down Section Ends -->

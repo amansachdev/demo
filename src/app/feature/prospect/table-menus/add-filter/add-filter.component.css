@@ -1,0 +1,484 @@
+
+.tableMenuFilterSection {
+  width: 100%;
+  height: 100%;
+  background: #FFFFFF;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3), 0px 0px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  padding: 30px 0px 20px 20px;
+  margin-top: -2px
+}
+
+.tableMenuFilterSectionMinHeight {
+  min-height: 30px;
+  max-height: 300px;
+  overflow: auto
+}
+
+.tableMenuFilterSection .tableMenuFilterSectionMinHeight div.filterMainSection:first-child {
+  margin-top: 0px
+}
+
+.tableMenuFilterSection .tableMenuFilterSectionMinHeight div.filterMainSection {
+  margin-top: 20px
+}
+
+.tableMenuFilterSection .filterSelectedValueSection input {
+  cursor: pointer;
+  position: relative;
+}
+
+.tableMenuFilterSection .filterSelectedValueSection input:focus {
+  background: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  padding: 9px 10px 9px 10px;
+  color: #3C3C3C
+}
+
+.tableMenuFilterSection .filterSelectedData {
+  width: 210px;
+  height: 35px;
+  background: rgba(51, 75, 250, 0.2);
+  color: #334BFA;
+  border-radius: 2px;
+  padding: 0px 30px 0px 30px;
+  border: 1.5px solid transparent;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tableMenuFilterSection .filterSelectedIcon {
+  position: absolute;
+  top: 11px;
+  left: 10px
+}
+
+.tableMenuFilterSection .filterSelectedText {
+  position: absolute;
+  top: 8px;
+  left: 28px
+}
+
+.tableMenuFilterSection .filterDropdownIcon {
+  margin-top: -28px;
+  margin-left: 182px
+}
+
+.filterSelectedContainsSection {
+  width: 165px;
+  height: 35px;
+  border: 1px solid #CCCCCC;
+  border-radius: 2px;
+  padding: 9px 9px 9px 6px
+}
+
+.filterSelectedContainsSection:hover {
+  border: 2px solid #334BFA;
+  padding: 9px 9px 9px 5px
+}
+
+.filterSelectedContainsSection.containsList:hover {
+  padding: 9px 9px 9px 6px
+}
+
+.filterSelectedContainsSection .filterSelectData {
+  width: 145px
+}
+
+.filterSelectedContainsSection:hover .filterSelectData {
+  margin-top: -5px !important
+}
+
+.filterSelectedContainsSection .filterDropdownIcon {
+  top: 8px;
+  right: 10px;
+  margin-left: 0
+}
+
+.filterSelectedContainsSection:hover .filterDropdownIcon {
+  top: 7px;
+  right: 9px;
+  margin-left: 0
+}
+
+.containsList .filterDropdownIcon {
+  top: 8px
+}
+
+.containsList:hover .filterDropdownIcon {
+  top: 8px
+}
+
+.filterTextSection:hover span {
+  color: #334BFA
+}
+
+.andOrDropdownOpen:hover span {
+  color: #3C3C3C
+}
+
+.containsList:hover {
+  border: 1px solid #CCCCCC
+}
+
+.containsList:hover .filterSelectData {
+  margin-top: -4px !important
+}
+
+.containsList:hover .filterDropdownIcon {
+  margin-top: -2px !important;
+  right: 10px !important
+}
+
+.filterInputSection input {
+  width: 140px;
+  height: 35px;
+  background: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  box-sizing: border-box;
+  border-radius: 2px;
+  padding: 10px 10px 10px 10px;
+  color: #3C3C3C;
+  font-size: 14px
+}
+
+.filterInputSection input:disabled {
+  cursor: no-drop;
+}
+
+.showFilterResultSection {
+  width: 140px;
+  max-height: 150px;
+  overflow: auto;
+  background: #FFFFFF;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3), 0px 0px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 0px 0px 5px 5px;
+  margin-left: 0px;
+  padding: 0px;
+  position: absolute;
+  right: 20px;
+  z-index: 9
+}
+
+.showFilterResultSection .dataLists:first-child {
+  padding-top: 15px;
+}
+
+.showFilterResultSection .dataLists:last-child {
+  padding-bottom: 15px;
+}
+
+.showFilterResultSection::-webkit-scrollbar {
+  width: 4px;
+  border-radius: 5px;
+  height: 9px
+}
+
+.showFilterResultSection .filterResultItem {
+  box-shadow: none;
+  background: transparent;
+  padding: 5px 10px 5px 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
+.showFilterResultSection .filterResultItem:hover {
+  background: rgba(51, 75, 250, 0.2);
+  color: #334BFA
+}
+
+.bottomButtonSection .resetToDefaultDiv span:hover {
+  color: #334BFA
+}
+
+.columnNameDropDownSection {
+  width: 210px;
+  max-height: 300px;
+  overflow: auto;
+  background: #FFFFFF;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3), 0px 0px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 0px 0px 5px 5px;
+  margin-top: 36px;
+  margin-left: 0px;
+  /*padding: 15px 0px;*/
+  position: absolute;
+  left: 98px;
+  z-index: 9
+}
+
+.columnNameDropDownSection .columnNameFilterItem {
+  box-shadow: none;
+  background: transparent;
+  padding: 5px 10px 5px 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
+.columnNameDropDownSection .columnNameFilterItem i {
+  line-height: 0px
+}
+
+.columnNameDropDownSection .columnNameFilterItem:hover {
+  background: rgba(51, 75, 250, 0.2);
+  color: #334BFA
+}
+
+.columnNameDropDownSection .columnNameFilterItem:hover span {
+  color: #334BFA
+}
+
+.columnNameDropDownSection::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 3px
+}
+
+.columnNameDropDownSection::-webkit-scrollbar {
+  width: 4px;
+  border-radius: 5px;
+  height: 9px
+}
+
+.columnListError {
+  width: 210px;
+  box-shadow: none;
+  background: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  border-radius: 0px 0px 5px 5px;
+  padding: 20px 0px;
+  cursor: context-menu;
+  min-height: 80px;
+  height: auto;
+  overflow: auto;
+  border-top: none;
+  position: absolute;
+  left: 98px;
+  top: 65px;
+  z-index: 9;
+}
+
+.columnListError .invalidSearchResult {
+  width: 200px;
+  margin: 0 auto;
+  padding: 0px 10px
+}
+
+.columnListError .invalidSearchResult p {
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
+.containsDropDownSection {
+  width: 164px;
+  max-height: max-content;
+  overflow: auto;
+  background: #FFFFFF;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3), 0px 0px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 0px 0px 5px 5px;
+  margin-left: 0px;
+  padding: 15px 0px;
+  position: absolute;
+  left: 324px;
+  margin-top: 36px;
+  z-index: 9
+}
+
+.containsDropDownSection .containsFilterItem {
+  box-shadow: none;
+  background: transparent;
+  padding: 5px 10px 5px 10px
+}
+
+.containsDropDownSection .containsFilterItem:hover {
+  background: rgba(51, 75, 250, 0.2);
+  color: #334BFA
+}
+
+.containsDropDownSection::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 3px
+}
+
+.containsDropDownSection::-webkit-scrollbar {
+  width: 4px;
+  border-radius: 5px;
+  height: 9px
+}
+
+.containsListError {
+  width: 165px;
+  box-shadow: none;
+  background: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  border-radius: 0px 0px 5px 5px;
+  padding: 20px 0px;
+  cursor: context-menu;
+  min-height: 80px;
+  height: auto;
+  overflow: auto;
+  border-top: none;
+  position: absolute;
+  left: 323px;
+  top: 65px
+}
+
+.containsListError .invalidSearchResult {
+  width: 160px;
+  margin: 0 auto;
+  padding: 0px 10px
+}
+
+.containsListError .invalidSearchResult p {
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
+.searchRowListError {
+  width: 140px;
+  box-shadow: none;
+  background: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  border-radius: 0px 0px 5px 5px;
+  padding: 20px 0px;
+  cursor: context-menu;
+  min-height: 80px;
+  height: auto;
+  overflow: auto;
+  border-top: none;
+  position: absolute;
+  right: 20px;
+  top: 65px
+}
+
+.searchRowListError .invalidSearchResult {
+  width: 135px;
+  margin: 0 auto;
+  padding: 0px 10px
+}
+
+.searchRowListError .invalidSearchResult p {
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
+.andOrDropdownSection {
+  width: 50px;
+  height: 67px;
+  background: #FFFFFF;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3), 0px 0px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 0px 0px 5px 5px;
+  margin-top: 30px;
+  margin-left: -64px;
+  position: absolute
+}
+
+.andOrDropdownSection .andOrFilterItem {
+  box-shadow: none;
+  background: transparent;
+  padding: 8px 8px 8px 8px
+}
+
+.andOrDropdownSection .andOrFilterItem:hover {
+  background: rgba(51, 75, 250, 0.2);
+  color: #334BFA;
+  padding: 8px 8px 8px 8px
+}
+
+.tableMenuBlueButton {
+  color: #FFFFFF !important;
+  background-color: #334BFA !important;
+  border: none !important;
+  cursor: pointer;
+  box-shadow: none !important;
+  border-radius: 5px;
+  min-width: 85px;
+  width: auto;
+  height: 35px;
+  padding: 0px 20px;
+  box-sizing: border-box;
+  outline: none
+}
+
+.tableMenuBlueButton:hover {
+  box-shadow: 0 0.25em 0.75em rgba(0, 156, 255, .5) !important
+}
+
+.tableMenuBlueButton:disabled {
+  color: #FFFFFF !important;
+  background-color: #CCCCCC !important;
+  border: none !important;
+  cursor: no-drop;
+  box-shadow: none !important;
+  min-width: 85px;
+  width: auto;
+  height: 35px;
+  border-radius: 5px;
+  padding: 0px 20px;
+  box-sizing: border-box;
+  outline: none
+}
+
+.tableMenuBlueButton:disabled:hover {
+  box-shadow: none !important
+}
+
+.buttonLoaderSection {
+  display: inline-flex;
+  line-height: 33px;
+  margin-left: -6px
+}
+
+.buttonLoaderSection .loaderImage {
+  width: 28px;
+  height: 28px;
+  margin-top: -1px;
+  margin-left: -11px
+}
+
+.loaderImage img {
+  width: 28px
+}
+
+.bottomButtonSection .addFilterButton {
+  font-family: SFUIText-Regular;
+  font-size: 14px;
+  line-height: 12px;
+  width: 107px;
+  height: 25px;
+  color: #3c3c3c;
+  border: none;
+  background: transparent;
+  padding: 0;
+  border-radius: 2px;
+}
+
+.bottomButtonSection .addFilterButton:hover {
+  background: rgba(51, 75, 250, 0.2);
+  color: #334BFA;
+}
+
+.bottomButtonSection .addFilterButton:disabled {
+  color: rgba(60, 60, 60, .5) !important;
+  cursor: no-drop !important;
+}
+
+.bottomButtonSection .addFilterButton:disabled:hover {
+  background: transparent;
+}
+
+.filterTextSection:hover span {
+  color: #3C3C3C;
+  cursor: context-menu;
+}
+
+.columnNameDropDownSection .dataLists:first-child {
+  padding-top: 15px;
+}
+
+.columnNameDropDownSection .dataLists:last-child {
+  padding-bottom: 15px;
+}

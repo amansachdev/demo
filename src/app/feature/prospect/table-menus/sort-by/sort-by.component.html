@@ -1,0 +1,95 @@
+<div class="tableMenuSortBySection customScrollbar" nz-menu>
+  <div class="tableMenuSortBySectionMinHeight customScrollbar pr-20">
+    <div class="sortByMainSection displayFlex mb-0">
+
+      <!--Sort By Left Clear Button-->
+      <div class="sortByClearSection mr-15 mt-8">
+        <i class="cursorPointer" (click)="isSortByDDMVisible = false" [inlineSVG]="'assets/table/clearGray.svg'"></i>
+      </div>
+
+      <!--Sort By Text Section -->
+      <div class="sortByTextSection noHover width-60 mr-15 mt-8">
+        <span class="regularFont fontSize14 lineHeight18 mainBlack">Sort by</span>
+      </div>
+
+
+      <!--Sort By Selected Column Section -->
+      <div class="sortBySelectedValueSection cursorPointer positionRelative mr-15"
+           [ngClass]="{'hideIcons': showSortByColumnListDDM}"
+           (click)="displaySortByColumnListDDM()"
+           (clickOutside)="showSortByColumnListDDM = false; sortByHideOnFocus = true;
+            setSortByColumnName(tableMenuService.columnNameGroupBy)">
+        <div class="sortBySelectedIcon mr-5 mt--2" *ngIf="sortByHideOnFocus">
+          <i [inlineSVG]="tableMenuService.columnIconSortBy" (click)="displaySortByColumnListDDM()"></i>
+        </div>
+        <input type="text" class="sortBySelectedData cursorPointer mainBlack fontSize14"
+               [(ngModel)]="tableMenuService.columnNameSortBy"
+               placeholder="Type to sort"
+               (focusin)="sortByHideOnFocus = true" (focusout)="sortByHideOnFocus = true">
+        <div class="sortByDropdownIcon positionAbsolute" *ngIf="sortByHideOnFocus" (click)="displaySortByColumnListDDM()">
+          <i [inlineSVG]="'assets/table/dropdownIconBlue.svg'" (click)="displaySortByColumnListDDM()"></i>
+        </div>
+      </div>
+
+      <!--Sort By Select DDM Column Section -->
+      <div *ngIf="showSortByColumnListDDM">
+        <div class="sortByColumnNameDropDownSection customScrollbar"
+             [ngClass]="{'visibilityNone': (tableMenuService.prospectColumn)}">
+          <div class="dataLists"
+               *ngFor="let col of tableMenuService.prospectColumn  | columnFilter: tableMenuService.columnNameSortBy;
+           let columnIndex = index">
+            <div class="sortByColumnNameFilterItem cursorPointer displayFlex"
+                 *ngIf="columnIndex !=0 " (click)="updateColumnNameSortBy(col)">
+              <i class="mr-5" [inlineSVG]="col.icon"></i>
+              <span class="regularFont fontSize14 lineHeight17 whiteSpaceNoWrap mainBlack overflowHidden
+              textEllipsis pt-3"> {{col.title}} </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Sort By Selected Column Error Section -->
+      <!--<div *ngIf="showSortByColumnError">-->
+      <div *ngIf="(tableMenuService.prospectColumn | columnFilter: tableMenuService.columnNameSortBy )== ''">
+        <div class="sortByColumnListError">
+          <div class="sortByColumnListInvalidSearchSection">
+            <div class="invalidSearchResult textAlignLeft">
+              <p class="regularFont fontSize14 lineHeight17 mainBlack pb-14"> No field types or tables names matching
+                " {{tableMenuService.columnNameSortBy}} ". Click on clear to search again </p>
+              <p class="clearSearch cursorPointer semiBoldFont fontSize14 lineHeight17 mainBlue mb-0
+                widthFitContent floatLeft" (click)="tableMenuService.columnNameSortBy = ''"> Clear </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Sort By Letter Section-->
+      <div class="sortByLetterMainSection">
+        <div class="displayFlex">
+          <div class="sortByLetterButton cursorPointer textAlignCenter mr-10" (click)="updateAscOrder()"
+               [ngClass]="{'active' :sortAscActive }"> A-Z
+          </div>
+          <div class="sortByLetterButton cursorPointer textAlignCenter" (click)="updateDescOrder()"
+               [ngClass]="{'active' :sortDscActive }"> Z-A
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="displayInlineFlex mt-50 width_100">
+    <div class="width_100">
+      <button class="customFieldBlueButton" [disabled]="sortByColumnNameSelected || prospectService.isSortingLoading">
+        <div class="buttonLoaderSection" (click)="applySort()">
+          <app-spinner class="loaderImage mt-0 ml--5" *ngIf="prospectService.isSortingLoading"></app-spinner>
+          <span class="regularFont"> Apply </span>
+        </div>
+      </button>
+    </div>
+    <div class="bottomButtonSection mt-4 pr-20">
+      <button class="resetToDefault textAlignCenter sortByButton cursorPointer ml-8"
+              [disabled]="!tableMenuService.sortActive" (click)="resetToDefaultSort()"> Reset to default
+      </button>
+    </div>
+  </div>
+</div>

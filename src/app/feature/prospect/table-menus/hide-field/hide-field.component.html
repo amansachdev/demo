@@ -1,0 +1,41 @@
+<div class="tableMenuHideSection customScrollbar" nz-menu>
+  <div class="searchColumnToHide placeHolder positionRelative mb-25" [ngClass]="{'sticky' : showInvalidSearch, 'invalidSearchDivision' : showInvalidSearch}">
+    <input type="text" placeholder="Type to search" [(ngModel)]="searchColumn"
+           (ngModelChange)="searchColumnFilter(searchColumn)" [ngClass]="{'sticky' : showInvalidSearch, 'invalidInputSearch' : showInvalidSearch}">
+    <div *ngIf="searchColumn">
+      <i class="hideMenuInputClear positionAbsolute cursorPointer" [inlineSVG]="'assets/table/clearGray.svg'"
+         (click)="clearHideColumnField()"></i>
+    </div>
+  </div>
+  <div class="hideColumnInvalidSearchSection" *ngIf="showInvalidSearch">
+    <div class="invalidSearchResult textAlignLeft">
+      <p class="regularFont fontSize14 lineHeight17 mainBlack pb-14"> No field types or tables names matching " {{searchColumn}} ". Click on clear to search again </p>
+      <p class="clearSearch cursorPointer semiBoldFont fontSize14 lineHeight17 mainBlue mb-0 widthFitContent floatLeft" (click)="clearHideColumnField()"> Clear </p>
+    </div>
+  </div>
+  <div class="hideColumnMinHeight customScrollbar" *ngIf="showColumnsDropDown">
+    <div *ngFor="let col of tableMenuService.prospectColumnWithoutCheckedColumn | columnFilter: searchColumn; let i = index;">
+      <div nz-menu-item class="menuItemList displayFlex cursorContext mb-15">
+        <nz-switch [disabled]="i == 0" [(ngModel)]="!col.hidden" (click)="onSwitch(col.colId, !col.hidden)"></nz-switch><span class="regularFont fontSize14 lineHeight17 mainBlack ml-10 pt-0 whiteSpaceNoWrap overflowHidden textEllipsis"> {{col.title}} </span>
+      </div>
+    </div>
+  </div>
+  <div class="bottomButtonSection mt-30">
+    <div class="displayInlineFlex">
+      <button class="tableMenuBlueButton mr-15"
+              [disabled]="isAllShown || isShowAllLoading" (click)="onShowHideAll(false)">
+        <div class="buttonLoaderSection">
+          <app-spinner class="loaderImage mt-0 ml--5" *ngIf="isShowAllLoading"></app-spinner>
+          <span class="regularFont fontSize14"> Show all </span>
+        </div>
+      </button>
+      <button class="tableMenuBlueButton"
+              [disabled]="isAllHidden || isHideAllLoading" (click)="onShowHideAll(true)">
+        <div class="buttonLoaderSection">
+          <app-spinner class="loaderImage mt-0 ml--5" *ngIf="isHideAllLoading"></app-spinner>
+          <span class="regularFont fontSize14"> Hide all </span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>

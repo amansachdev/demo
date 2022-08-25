@@ -1,0 +1,158 @@
+/*Sidebar CSS Starts*/
+.profileSection {
+  background: #FFFFFF;
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5), 0px 5px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  width: 360px;
+  height: auto;
+}
+
+.profileAccountActive .aloreTertiaryButton {
+  height: 35px;
+}
+
+.profileAccountBottom .aloreTertiaryButton {
+  height: 35px;
+}
+
+.profileAccountActive {
+  padding: 50px 0px 30px 0px;
+  border-bottom: 1px solid #CCCCCC;
+  margin-bottom: 12px;
+}
+
+.profileAccountBottom .profileSignout {
+  padding: 30px 0px 20px 0px;
+  border-top: 1px solid #CCCCCC;
+}
+
+.profileAccountActive h2 {
+  font-size: 16px;
+  margin-bottom: 0;
+  color: #3C3C3C;
+}
+
+.profileAccountActive p {
+  font-size: 14px;
+  line-height: 16px;
+  color: #3C3C3C;
+}
+
+.profileAccountActive .uploads {
+  position: absolute;
+  top: 110px;
+  right: 135px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  padding: 5px;
+  z-index: 1;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.allUsersName h3 {
+  font-size: 14px;
+  line-height: 16px;
+  color: #3C3C3C;
+  margin-bottom: 0px;
+}
+
+.allUsersName p {
+  font-size: 12px;
+  line-height: 14px;
+  color: #3C3C3C;
+  margin-bottom: 0px;
+}
+
+.allUsersSignout p {
+  font-size: 12px;
+  line-height: 14px;
+  color: #3C3C3C;
+  margin-bottom: 0px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.allUsersName {
+  width: 190px;
+}
+
+.profileHover {
+  width: 100%;
+  padding: 10px 30px 10px 30px;
+  cursor: default;
+}
+
+.profileHover:hover {
+  color: #334BFA;
+  background: rgba(51, 75, 250, 0.2);
+}
+
+.profileHover:hover h3 {
+  color: #334BFA;
+}
+
+.profileHover:hover p {
+  color: #334BFA;
+}
+
+.profileHover:hover .text {
+  color: #334BFA;
+}
+
+.text:hover {
+  border-bottom: 1px solid #334BFA;
+}
+
+.profileFooterTextSection a {
+  font-size: 12px;
+  line-height: 14px;
+  color: #3C3C3C;
+  margin: 0px 10px;
+}
+
+.profileFooterTextSection a:hover {
+  color: #334BFA;
+  border-bottom: 1px solid #334BFA;
+}
+
+.profileFooterTextSection {
+  margin-bottom: 3px;
+}
+
+.profileAddAnother {
+  width: 100%;
+  padding: 10px 30px 20px 30px;
+  cursor: default;
+  margin-bottom: 12px;
+}
+
+.addAnotherAccount h3 {
+  font-size: 14px;
+  line-height: 26px;
+  color: #3C3C3C;
+  margin-bottom: 0px;
+  cursor: pointer;
+}
+
+.profileAddAnother:hover {
+  color: #334BFA;
+  background: rgba(51, 75, 250, 0.2);
+}
+
+.profileAddAnother:hover .addAnotherAccount h3 {
+  color: #334BFA;
+}
+
+.profileFooterTextSection a {
+  text-decoration: none;
+}
+
+.profileSection .blueBorderButton {
+  min-width: 200px;
+  width: 200px;
+  height: 35px;
+  padding: 0px;
+}
+
+/*Sidebar CSS Ends*/

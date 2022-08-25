@@ -1,0 +1,34 @@
+.tableMenuRowHeightSection {
+  width: 195px;
+  height: 148px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5), 0px 5px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  margin-top: -3px;
+  margin-left: 0px;
+  padding: 20px 0px
+}
+
+.tableMenuRowHeightSection .menuItemList {
+  font-family: SFUIText-Regular;
+  font-size: 14px;
+  line-height: 17px;
+  color: #3C3C3C;
+  padding: 5px 20px 4px 20px
+}
+
+.tableMenuRowHeightSection .menuItemList:hover {
+  background: rgba(51, 75, 250, 0.2);
+}
+
+.tableMenuRowHeightSection .menuItemList:hover span {
+  color: #334BFA
+}
+
+.tableMenuRowHeightSection .activeRow {
+  background: rgba(51, 75, 250, 0.2);
+}
+
+.tableMenuRowHeightSection .activeRow span {
+  color: #334BFA;
+}

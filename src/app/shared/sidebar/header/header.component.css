@@ -1,0 +1,22 @@
+.tableHeader {
+  border-bottom: 1px solid #CCCCCC;
+  z-index: 9999;
+  position: fixed;
+  width: 100%;
+  background: #FFFFFF;
+}
+
+.tableHeading h1 {
+  font-family: SFUIText-Bold !important;
+  color: #3C3C3C;
+  font-size: 30px;
+  line-height: 36px;
+  margin-bottom: 0px;
+  border-left: 1px solid #F1F1F1;
+  padding: 20px 50px 20px 30px;
+  margin-left: 69px;
+}
+
+.tableHeaderPadding {
+  padding: 24px 100px 24px 20px;
+}

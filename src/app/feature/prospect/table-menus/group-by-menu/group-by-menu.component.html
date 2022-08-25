@@ -1,0 +1,120 @@
+<div class="tableMenuGroupBySection customScrollbar" nz-menu>
+  <div class="tableMenuGroupBySectionMinHeight customScrollbar pr-20">
+    <div class="groupByMainSection displayFlex mb-0">
+
+      <!--Group By Left Clear Button-->
+      <div class="groupByClearSection mr-15 mt-8">
+        <i class="cursorPointer" [inlineSVG]="'assets/table/clearGray.svg'"></i>
+      </div>
+
+      <!--Group By Text Section -->
+      <div class="groupByTextSection noHover width-60 mr-15 mt-8">
+        <span class="regularFont fontSize14 lineHeight18 mainBlack">Group by</span>
+      </div>
+
+      <!--Group By Selected Column Section -->
+      <div class="groupBySelectedValueSection cursorPointer positionRelative mr-15"
+           (click)="displayGroupByColumnListDDM()"
+           (clickOutside)="showGroupBYColumnListDDM = false; groupByHideOnFocus = true;
+           setGroupByColumnName(tableMenuService.columnNameGroupBy)">
+        <div class="groupBySelectedIcon mr-5 mt--2" *ngIf="groupByHideOnFocus">
+          <i [inlineSVG]="tableMenuService.columnIconGroupBy" (click)="displayGroupByColumnListDDM()"></i>
+        </div>
+        <input type="text" class="groupBySelectedData cursorPointer mainBlack fontSize14"
+               [(ngModel)]="tableMenuService.columnNameGroupBy"
+               placeholder="Type to filter"
+               (focusin)="groupByHideOnFocus = false" (focusout)="groupByHideOnFocus = false">
+        <div class="groupByDropdownIcon" *ngIf="groupByHideOnFocus" (click)="displayGroupByColumnListDDM()">
+          <i [inlineSVG]="'assets/table/dropdownIconBlue.svg'" (click)="displayGroupByColumnListDDM()"></i>
+        </div>
+      </div>
+
+      <!--Group By Select DDM Column Section -->
+      <div *ngIf="showGroupBYColumnListDDM">
+        <div class="groupByColumnNameDropDownSection customScrollbar"
+             [ngClass]="{'visibilityNone': (tableMenuService.prospectColumn)}">
+          <div class="dataLists"
+               *ngFor="let col of tableMenuService.prospectColumn | columnFilter: tableMenuService.columnNameGroupBy;
+            let columnIndex = index">
+            <div class="groupByColumnNameFilterItem cursorPointer displayFlex"
+                 *ngIf="columnIndex != 0" (click)="updateColumnNameGroupBy(col);">
+              <i class="mr-5" [inlineSVG]="col.icon"></i>
+              <span class="regularFont fontSize14 lineHeight17 whiteSpaceNoWrap mainBlack overflowHidden
+                textEllipsis pt-3"> {{col.title}} </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Group By Selected Column Error Section -->
+      <div *ngIf="(tableMenuService.prospectColumn | columnFilter: tableMenuService.columnNameGroupBy )== ''">
+        <div class="groupByColumnListError">
+          <div class="groupByColumnListInvalidSearchSection">
+            <div class="invalidSearchResult textAlignLeft">
+              <p class="regularFont fontSize14 lineHeight17 mainBlack pb-14"> No field types or tables names matching
+                "{{tableMenuService.columnNameGroupBy}}". Click on clear to search again </p>
+              <p class="clearSearch cursorPointer semiBoldFont fontSize14 lineHeight17 mainBlue mb-0
+                widthFitContent floatLeft" (click)="tableMenuService.columnNameGroupBy = ''"> Clear </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Group By Letter Section-->
+      <div class="groupByLetterMainSection">
+        <div class="displayFlex">
+          <div class="groupByLetterButton cursorPointer textAlignCenter mr-10"
+               (click)="groupBySortAscending(); sortAscActive = true;sortDscActive = false"
+               [ngClass]="{'active' :sortAscActive }"> A-Z
+          </div>
+          <div class="groupByLetterButton cursorPointer textAlignCenter"
+               (click)="groupByDescending();sortAscActive = false;sortDscActive = true"
+               [ngClass]="{'active' :sortDscActive }"> Z-A
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+  <div class="displayInlineFlex mt-50 width_100">
+    <div class="width_100">
+      <button class="customFieldBlueButton" [disabled]="tableMenuService.groupByColumnNameSelected">
+        <div class="buttonLoaderSection" (click)="showGroupByComponentView()">
+          <app-spinner class="loaderImage mt-0 ml--5" *ngIf="tableMenuService.isLoading"></app-spinner>
+          <span class="regularFont"> Apply </span>
+        </div>
+      </button>
+    </div>
+    <div class="bottomButtonSection mt-4 pr-20" (click)="resetToGridView()">
+      <button class="resetToDefault textAlignCenter groupByButton cursorPointer ml-8"
+              [disabled]="tableMenuService.resetButtonDisabledGroupBy"> Reset to default
+      </button>
+    </div>
+
+    <!--<div class="bottomButtonSection floatLeft width_100">
+      <div class="displayInlineFlex">
+        <button class="tableMenuBlueButton mr-15" [disabled]="isSaveButtonDisabled" (click)="showGroupByComponentView()">
+          <div class="buttonLoaderSection">
+            <app-spinner class="loaderImage mt-0 ml&#45;&#45;5" *ngIf="isLoading"></app-spinner>
+            <span class="regularFont fontSize14"> Pick another group </span>
+          </div>
+        </button>
+      </div>
+    </div>-->
+
+    <!-- Group By Bottom Button Right Section Starts -->
+    <div class="bottomButtonSection floatRight pr-20" *ngIf="tableMenuService.showGroupByComponent">
+      <div class="displayInlineFlex mt-5">
+        <button class="collapseAll textAlignCenter groupByButton disabled cursorPointer"
+                [ngClass]="{'disabled': collapseAll, 'ml--5': !collapseAll }"
+                (click)="collapseAllPanel()" [disabled]="collapseAll"> Collapse all
+        </button>
+        <button class="expandAll textAlignCenter groupByButton cursorPointer "
+                [ngClass]="{'disabled': expandAll, 'ml--5': !expandAll }"
+                (click)="expandAllPanel()" [disabled]="expandAll"> Expand all
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

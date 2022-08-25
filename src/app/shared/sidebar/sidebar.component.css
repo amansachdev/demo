@@ -1,0 +1,39 @@
+.tableSidebar {
+  background: #e8e8e8;
+  color: #3C3C3C;
+  height: 100%;
+  width: 70px;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding-top: 20px;
+  border-right: 1px solid #CCCCCC;
+  text-align: center;
+}
+
+.tableSidebarContent {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+.tableSidebarTop {
+  position: absolute;
+  top: 130px;
+  left: 10px;
+}
+
+.tableSidebarBottom {
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+}
+
+.userOnlineState {
+  position: absolute;
+  top: 30px;
+  right: 2px;
+}
+

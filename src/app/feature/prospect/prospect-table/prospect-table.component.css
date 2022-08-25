@@ -1,0 +1,38 @@
+.tableHeaderLeftSection {
+  /*background: #F1F1F1;*/
+  background: #FFFFFF;
+  border-bottom: 1px solid #CCCCCC;
+  /*width: 280px;*/
+  width: 100%;
+  padding: 20px 130px 0px 30px;
+  margin-left: 70px;
+  text-align: left;
+  height: 80px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tableHeaderLeftSection h1 {
+  font-family: SFUIText-Bold !important;
+  color: #3C3C3C;
+  font-size: 30px;
+  line-height: 36px;
+  margin-bottom: 0px;
+  margin-top: 1px;
+  margin-left: 5px;
+  letter-spacing: -1px;
+}
+
+.tableHeaderRightSection {
+  border-bottom: 1px solid #CCCCCC;
+  /*width: 100%;*/
+  padding: 21px 100px 21px 20px;
+}
+
+.leftSideBarSection {
+  position: absolute;
+  left: 15px;
+  top: 20px;
+  z-index: 9999;
+}

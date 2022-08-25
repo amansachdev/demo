@@ -1,0 +1,433 @@
+<div class="displayFlex" [ngClass]="{'sideBarCollapse':leftSidebarCollapse == false,
+  'sideBarExpand':leftSidebarCollapse == true}">
+  <div class="tableHeaderLeftSection positionRelative">
+    <h1> Prospector </h1>
+    <div class="collapseSideBar leftSideNavBarDiv">
+      <div class="collapseSideBar leftSideNavBarDiv">
+        <span (click)="leftSidebarCollapse = false; hideBlackSvg()" *ngIf="leftSidebarCollapse == true"
+              nz-tooltip nzTooltipTitle="Hide navigation menu" nzTooltipPlacement="top"
+              [nzTooltipOverlayClassName]="'sideBarTooltip'" [nzTooltipTrigger]="'hover'"
+              (mouseover)="hideBlueSvg()" (mouseout)="hideBlackSvg()">
+          <i> <img class="sideBarExpand" [src]="hideMenuIcon"> </i>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="displayFlex tableHeaderRightSection" [ngClass]="{'ml-100':leftSidebarCollapse == false}">
+    <div class="segmentViewSection width_100 textAlignRight pt-7 mr-40">
+      <div class="displayFlex width_100 justifyContentEnd">
+        <div class="selectedViewSection">
+          <div class="selectViewDDM cursorPointer displayFlex" nzTrigger="click" nz-dropdown
+               [nzDropdownMenu]="viewMenuDDM"
+               [nzClickHide]=true [ngClass]="{'activeViewClass': isViewDDMVisible}" [(nzVisible)]=isViewDDMVisible>
+            <i class="selectedViewIcon" *ngIf="listView" [inlineSVG]="'assets/table/listViewGray.svg'"></i>
+            <i class="selectedViewIcon" *ngIf="!listView" [inlineSVG]="'assets/table/gridViewGray.svg'"></i>
+            <i class="selectViewDDMIcon ml-6" [inlineSVG]="'assets/table/dropDownIconGray.svg'"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-header></app-header>
+  </div>
+</div>
+
+
+<div class="segmentMainSection mainPaddingSection" [ngClass]="{'sideBarCollapse':leftSidebarCollapse == false,
+'sideBarExpand':leftSidebarCollapse == true}">
+  <div class="displayFlex">
+    <div class="expandSideBar leftSideNavBarDiv">
+      <span (click)="leftSidebarCollapse = true" *ngIf="leftSidebarCollapse == false"
+            nz-tooltip nzTooltipTitle="Show navigation menu" nzTooltipPlacement="top"
+            [nzTooltipOverlayClassName]="'sideBarTooltip'" [nzTooltipTrigger]="'hover'">
+        <i class="sideBarCollapsed" [inlineSVG]="'assets/table/showNavigationMenu.svg'"></i>
+      </span>
+    </div>
+    <div class="segmentLeftMainSection" id="leftSidebarCollapse">
+      <div class="leftSegmentInput placeHolder textAlignCenter mb-20 positionRelative">
+        <input [(ngModel)]="searchSegmentName" type="text" placeholder="Search for a table or segment">
+        <div class="clearSegmentSearch" *ngIf="searchSegmentName">
+          <i class="segmentInputClear positionAbsolute cursorPointer" [inlineSVG]="'assets/table/clearGray.svg'"
+             (click)="searchSegmentName = ''"></i>
+        </div>
+      </div>
+      <div class="leftSegmentSubSection">
+        <h1 class="segmentTitle mediumFont fontSize14 Capitalize lineHeight12 ml-19 mb-20"> SEGMENTS </h1>
+        <div class="segmentMinHeight customScrollbar">
+          <div *ngFor="let segment of segments | segmentFilter: searchSegmentName; let i = index;trackBy: trackByFn">
+            <div class="displayFlex cursorPointer widthFitContent mb-10 ml-20" *ngIf="!segment.hidden"
+                 (click)="scrollSegmentIntoView(i)">
+              <!--<i class="mr-10" [inlineSVG]="item.emoji"></i>-->
+              <ngx-emoji [set]="'google'" [emoji]="segment.emoji" size="14" skin="1"></ngx-emoji>
+              <span class="semiBoldFont fontSize14 lineHeight12 mainBlack pt-2 ml-10 letterSpacing5"> {{segment.segmentName}} </span>
+            </div>
+          </div>
+        </div>
+        <div class="addNewSegment textAlignCenter mt-64 positionAbsolute bottom25">
+          <button class="blueButton semiBoldFont cursorPointer textAlignLeft" (click)="addNewSegmentModal()">
+            <i class="mr-5" [inlineSVG]="'assets/table/plusIconWhite.svg'"></i> Add a segment
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="segmentRightMainSection" [ngClass]="{'pl-30':leftSidebarCollapse == false}">
+      <div class="rightSegmentList">
+        <div class="selectedSegmentList">
+          <div class="selectedSegmentData" [id]="'selectedSegmentData'+i"
+               [ngClass]="{'gridViewActive': !listView, 'listViewActive': listView}"
+               *ngFor="let segment of segments ; let i = index; trackBy: trackByFn">
+            <div class="displayFlex positionRelative height36 alignBaseLine" *ngIf="!segment.hidden"
+                 [ngClass]="{'mb-40': !listView, 'mb-24': listView}">
+              <ngx-emoji class="titleEmojiIcon" [set]="'google'" [emoji]="segment.emoji" size="36"></ngx-emoji>
+              <span class="selectedSegmentText semiBoldFont fontSize30 mainBlack positionAbsolute">
+                {{ segment.segmentName }}
+                <i nz-dropdown nzTrigger="click" [nzDropdownMenu]="segmentDDM"
+                   (nzVisibleChange)="onVisibleChangeSegmentDDM($event, i)"
+                   [ngClass]="{'activeSvg': isSegmentDDMVisible && currentSegmentIndex == i}"
+                   class="dropdownIcon selectedSegmentDDM positionAbsolute ml-30"
+                   [inlineSVG]="'assets/table/dropDownIconGray.svg'"></i>
+              </span>
+              <nz-dropdown-menu class="segmentDDMWrapper" #segmentDDM="nzDropdownMenu">
+                <div class="segmentDDMSection" nz-menu>
+                  <div class="segmentDDMItem regularFont fontSize14 lineHeight14 mainBlack cursorPointer letterSpacing5" nz-menu-item
+                       (click)="onEditSegmentDetails(segment)"> Edit Segment details
+                  </div>
+                  <div class="segmentDDMItem regularFont fontSize14 lineHeight14 mainBlack cursorPointer letterSpacing5" nz-menu-item
+                       (click)="deleteSegmentOpenModel(segment)"> Delete
+                  </div>
+                </div>
+              </nz-dropdown-menu>
+            </div>
+            <div *ngIf="!segment.hidden">
+              <div class="cardViewListData" *ngIf="!listView">
+                <div *ngFor="let table of segment.tableModelList; trackBy: trackByFn">
+                  <a [href]="'/prospect/' + table.segmentId + '/' + table.tableId">
+                    <div class="rightSectionSegment positionRelative cursorPointer hoverBlueDiv"
+                         (click)="showProspectTable(table)">
+                      <div class="positionAbsolute top2 right10">
+                        <svg width="9" height="10" viewBox="0 0 9 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="4.5" cy="5.01465" r="4.5" [attr.fill]="'transparent'"/>
+                        </svg>
+                      </div>
+                      <div class="addedSegment" [style.border]="'2px solid '+table.color ">
+                        <ngx-emoji class="mt-4" *ngIf="selectedSegmentEmoji" [set]="'google'" [emoji]="table.emoji"
+                                   size="30" skin="1"></ngx-emoji>
+                      </div>
+                      <h1 class="addedSegmentTitle gridViewTitle semiBoldFont fontSize14 lineHeight14 mainBlack
+                    pt-10 textAlignLeft letterSpacing5"> {{ table.name }} </h1>
+                    </div>
+                  </a>
+                </div>
+                <div class="rightSectionSegment">
+                  <div class="addNewTableDiv cursorPointer" nz-tooltip nzTooltipTitle="Add a new table"
+                       nzTooltipPlacement="top" [nzTooltipOverlayClassName]="'customTooltip'"
+                       [nzTooltipTrigger]="'hover'"
+                       (click)="addNewTableModal(segment.segmentId)">
+                    <i [inlineSVG]="'assets/table/plusIconBigGray.svg'"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="displayFlex wrapFlex" *ngIf="listView">
+              <div class="segmentSelectedTypeList displayFlex wrapFlex width_100">
+                <div class="column3" *ngFor="let table of segment.tableModelList; trackBy: trackByFn">
+                  <div class="segmentSelectedTypeListLeft">
+                    <div class="listViewSegmentList">
+                      <a [href]="'/prospect/' + table.segmentId + '/' + table.tableId">
+                        <div class="displayFlex cursorPointer widthFitContent mb-16"
+                             (click)="showProspectTable(table)">
+                          <ngx-emoji *ngIf="selectedSegmentEmoji" [set]="'google'" [emoji]="table.emoji" size="20"
+                                     skin="1"></ngx-emoji>
+                          <span
+                            class="mediumFont fontSize14 lineHeight12 mainBlack overflowHidden textEllipsis max-width-280 pt-5 ml-10 "> {{ table.name }} </span>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="listViewAddTable cursorPointer displayFlex positionRelative"
+                     (click)="addNewTableModal(segment.segmentId)">
+                  <div class="listViewAddNewTable">
+                    <i class="positionAbsolute left6" [inlineSVG]="'assets/table/plusIconSmallGray.svg'"></i>
+                  </div>
+                  <span
+                    class="listViewAddTable mediumFont fontSize14 lineHeight12 mainBlack ml-10 pt-3"> Add a table </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--ADD SEGMENT STARTS HERE-->
+<nz-modal nzWrapClassName="addSegmentWrapper" nzClassName="addSegmentMainSection" [nzWidth]="550"
+          [(nzVisible)]="addNewSegmentModalVisible" (nzOnCancel)="resetAddNewSegmentModalData()"
+          [nzCloseIcon]="createSegmentModalCloseIcon">
+  <div class="segmentMainClass customPlaceholder">
+    <h1 class="mediumFont fontSize22 lineHeight18 mainBlack textAlignLeft mb-40"> Add a Segment </h1>
+
+    <div class="segmentName segmentLabel positionRelative mb-30">
+      <p class="subTitle mediumFont fontSize16 lineHeight14 mainBlack mb-10"> Name* </p>
+      <input type="text" placeholder="Enter Segment Name" [(ngModel)]="newSegmentName" #newSegmentNameEl=ngModel
+             (ngModelChange)="onChangeNewSegmentName(newSegmentName)">
+      <p class="errorText"
+         [style.visibility]="segmentNameAlreadyExistsError && newSegmentName !== '' ? 'visible' : 'hidden'">
+        Segment with same name already exist!</p>
+
+      <p class="errorText"
+         [style.visibility]="newSegmentNameEl.control.dirty && newSegmentName == '' ? 'visible' : 'hidden'">
+        Segment name cannot be empty!</p>
+    </div>
+
+    <div class="tableIcon tableLabel mb-30">
+      <p class="subTitle mediumFont fontSize16 lineHeight18 mainBlack mb-10"> Icon </p>
+      <div class="selectIconDiv cursorPointer positionRelative" [ngClass]="{'activeEmojiDDM': showSegmentEmoji }"
+           (click)="showSegmentEmoji = !showSegmentEmoji">
+        <ngx-emoji class="selectedEmojiIcon" *ngIf="selectedSegmentEmoji" [set]="'google'"
+                   [emoji]="selectedSegmentEmoji" size="24" skin="1"></ngx-emoji>
+        <i class="dropDownIcon" [inlineSVG]="'assets/table/dropDownIconGray.svg'"></i>
+      </div>
+      <emoji-mart *ngIf="showSegmentEmoji" class="segmentEmojiSection" [set]="'google'"
+                  (clickOutside)="showSegmentEmoji = false"
+                  (emojiSelect)="selectSegmentEmoji($event)" totalFrequentLines="1" skin="1"></emoji-mart>
+    </div>
+
+    <div class="segmentDescription segmentLabel mb-30">
+      <p class="subTitle mediumFont fontSize16 lineHeight14 mainBlack mb-10"> Description </p>
+      <textarea ngModel type="text" placeholder="Add Description" [(ngModel)]="newSegmentDescription"
+                #newSegmentDescriptionEl="ngModel"></textarea>
+      <!--<input #newSegmentDescriptionEl type="text" placeholder="Add Description">-->
+    </div>
+
+    <div class="addNewSegmentButtonSection displayFlex mt-31">
+      <button class="mainSaveButtonBlue"
+              [disabled]="!newSegmentName || segmentNameAlreadyExistsError || isAddNewSegmentLoading"
+              (click)="addNewSegment(newSegmentName, newSegmentDescription)">
+        <div class="buttonLoaderSection">
+          <app-spinner class="loaderImage mt-0 ml--5" *ngIf="isAddNewSegmentLoading"></app-spinner>
+          <span class="mediumFont"> Save </span>
+        </div>
+      </button>
+      <button class="mainCancelButtonBlue ml-15" (click)="resetAddNewSegmentModalData()">
+        <span class="mediumFont"> Cancel </span>
+      </button>
+    </div>
+
+  </div>
+</nz-modal>
+<!--ADD SEGMENT STARTS HERE-->
+
+
+<!--EDIT SEGMENT STARTS HERE-->
+<nz-modal nzWrapClassName="addSegmentWrapper" nzClassName="addSegmentMainSection" [nzWidth]="550"
+          [(nzVisible)]="editSegmentModalVisible" (nzOnCancel)="resetEditSegmentModalData()"
+          [nzCloseIcon]="createSegmentModalCloseIcon">
+  <div class="segmentMainClass customPlaceholder" *ngIf="segmentToBeEdited">
+    <h1 class="mediumFont fontSize22 lineHeight18 mainBlack textAlignLeft mb-40"> Edit Segment </h1>
+
+    <div class="segmentName segmentLabel positionRelative mb-30">
+      <p class="subTitle mediumFont fontSize16 lineHeight14 mainBlack mb-10"> Name* </p>
+      <input ngModel type="text" placeholder="Enter Segment Name" [(ngModel)]="segmentToBeEdited.segmentName"
+             (ngModelChange)="onChangeEditSegmentName(segmentToBeEdited.segmentId, segmentToBeEdited.segmentName)"
+             #editSegmentNameEl="ngModel">
+      <p class="errorText"
+         [style.visibility]="editSegmentNameAlreadyExistsError && segmentToBeEdited.segmentName !== '' ? 'visible' : 'hidden'">
+        Segment with same name already exist!</p>
+
+      <p class="errorText"
+         [style.visibility]="editSegmentNameEl.control.dirty && segmentToBeEdited.segmentName === '' ? 'visible' : 'hidden'">
+        Segment name cannot be empty!</p>
+    </div>
+
+    <div class="tableIcon tableLabel mb-30">
+      <p class="subTitle mediumFont fontSize16 lineHeight18 mainBlack mb-10"> Icon </p>
+      <div class="selectIconDiv cursorPointer positionRelative" [ngClass]="{'activeEmojiDDM': showEditEmoji }"
+           (click)="showEditEmoji = !showEditEmoji">
+        <ngx-emoji class="selectedEmojiIcon" *ngIf="selectedSegmentEmoji" [set]="'google'"
+                   [emoji]="segmentToBeEdited.emoji" size="24" skin="1"></ngx-emoji>
+        <i class="dropDownIcon" [inlineSVG]="'assets/table/dropDownIconGray.svg'"></i>
+      </div>
+      <emoji-mart *ngIf="showEditEmoji" class="segmentEmojiSection" [set]="'google'"
+                  (clickOutside)="showEditEmoji = false"
+                  (emojiSelect)="editSegmentEmoji($event)" totalFrequentLines="1" skin="1"></emoji-mart>
+    </div>
+
+    <div class="segmentDescription segmentLabel mb-30">
+      <p class="subTitle mediumFont fontSize16 lineHeight14 mainBlack mb-10"> Description </p>
+      <textarea ngModel type="text" placeholder="Add Description" [(ngModel)]="segmentToBeEdited.description"
+                #editSegmentDescriptionEl="ngModel"></textarea>
+
+    </div>
+
+    <div class="addNewSegmentButtonSection displayFlex mt-31">
+      <div class="displayFlex">
+        <button class="mainSaveButtonBlue"
+                [disabled]="segmentToBeEdited.segmentName == '' || isEditSegmentLoading || editSegmentNameAlreadyExistsError || !isEditSegmentEmojiChanged && !editSegmentNameEl.control.dirty && !editSegmentDescriptionEl.control.dirty"
+                (click)="onSaveEditSegment()">
+          <div class="buttonLoaderSection">
+            <app-spinner class="loaderImage mt-0 ml--5" *ngIf="isEditSegmentLoading"></app-spinner>
+            <span class="mediumFont"> Save </span>
+          </div>
+        </button>
+        <button class="mainCancelButtonBlue ml-15" (click)="resetEditSegmentModalData()">
+          <span class="mediumFont"> Cancel </span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</nz-modal>
+<!--EDIT SEGMENT ENDS HERE-->
+
+
+<!--CREATE SEGMENT CLOSE ICON FOR MODAL STARTS HERE-->
+<ng-template #createSegmentModalCloseIcon>
+  <div class="customCloseIcon">
+    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M10.156 11.7733L6.10938 7.72795L2.06279 11.7733C1.95675 11.8798 1.83073 11.9643 1.69195 12.022C1.55317 12.0796 1.40437 12.1093 1.25409 12.1093C1.1038 12.1093 0.955001 12.0796 0.816221 12.022C0.677442 11.9643 0.551418 11.8798 0.445385 11.7733C0.338887 11.6673 0.254382 11.5412 0.19672 11.4025C0.139058 11.2637 0.109375 11.1149 0.109375 10.9646C0.109375 10.8143 0.139058 10.6655 0.19672 10.5267C0.254382 10.388 0.338887 10.2619 0.445385 10.1559L4.49074 6.10931L0.445385 2.06273C0.338887 1.95669 0.254382 1.83067 0.19672 1.69189C0.139058 1.55311 0.109375 1.40431 0.109375 1.25402C0.109375 1.10374 0.139058 0.95494 0.19672 0.81616C0.254382 0.677381 0.338887 0.551357 0.445385 0.445323C0.551418 0.338826 0.677442 0.254321 0.816221 0.196659C0.955001 0.138997 1.1038 0.109314 1.25409 0.109314C1.40437 0.109314 1.55317 0.138997 1.69195 0.196659C1.83073 0.254321 1.95675 0.338826 2.06279 0.445323L6.10938 4.49068L10.156 0.445323C10.262 0.338826 10.388 0.254321 10.5268 0.196659C10.6656 0.138997 10.8144 0.109314 10.9647 0.109314C11.1149 0.109314 11.2637 0.138997 11.4025 0.196659C11.5413 0.254321 11.6673 0.338826 11.7734 0.445323C11.8799 0.551357 11.9644 0.677381 12.022 0.81616C12.0797 0.95494 12.1094 1.10374 12.1094 1.25402C12.1094 1.40431 12.0797 1.55311 12.022 1.69189C11.9644 1.83067 11.8799 1.95669 11.7734 2.06273L7.72801 6.10931L11.7734 10.1559C11.8799 10.2619 11.9644 10.388 12.022 10.5267C12.0797 10.6655 12.1094 10.8143 12.1094 10.9646C12.1094 11.1149 12.0797 11.2637 12.022 11.4025C11.9644 11.5412 11.8799 11.6673 11.7734 11.7733C11.6673 11.8798 11.5413 11.9643 11.4025 12.022C11.2637 12.0796 11.1149 12.1093 10.9647 12.1093C10.8144 12.1093 10.6656 12.0796 10.5268 12.022C10.388 11.9643 10.262 11.8798 10.156 11.7733Z"
+        fill="#888888"/>
+    </svg>
+  </div>
+</ng-template>
+<!--CREATE SEGMENT CLOSE ICON FOR MODAL ENDS HERE-->
+
+
+<!--RESET MODAL STARTS HERE-->
+<nz-modal nzWrapClassName="addNewTableWrapper" nzClassName="addNewTableMainSection"
+          [(nzVisible)]="addNewTableModalVisible" (nzOnCancel)="resetAddNewTableModalData()"
+          [nzCloseIcon]="createTableModalCloseIcon" [nzWidth]="550">
+  <div class="tableMainClass customPlaceholder">
+    <h1 class="mediumFont fontSize22 lineHeight18 mainBlack textAlignLeft mb-40"> Add a Table </h1>
+
+    <div class="tableName tableLabel positionRelative mb-30">
+      <p class="subTitle mediumFont fontSize16 lineHeight18 mainBlack mb-10"> Name *</p>
+      <input type="text" placeholder="Ex: Computer Software" [(ngModel)]="newTableName" #newTableNameEl=ngModel
+             (ngModelChange)="onChangeNewTableName(newTableName)">
+      <p class="errorText"
+         [style.visibility]="tableNameAlreadyExistsError && newTableName !== ''? 'visible' : 'hidden'">
+        Table with same name already exist!</p>
+      <p class="errorText"
+         [style.visibility]="newTableNameEl.control.dirty && newTableName === '' ? 'visible' : 'hidden'">
+        Table name cannot be empty!</p>
+    </div>
+
+    <div class="tableIcon tableLabel mb-30">
+      <p class="subTitle mediumFont fontSize16 lineHeight18 mainBlack mb-10"> Icon </p>
+      <div class="selectIconDiv cursorPointer positionRelative" [ngClass]="{'activeEmojiDDM': showTableEmoji }"
+           (click)="showTableEmoji = !showTableEmoji">
+        <ngx-emoji class="selectedEmojiIcon" *ngIf="selectedTableEmoji" [set]="'google'" [emoji]="selectedTableEmoji"
+                   size="24" skin="1"></ngx-emoji>
+        <i class="dropDownIcon" [inlineSVG]="'assets/table/dropDownIconGray.svg'"></i>
+      </div>
+      <emoji-mart *ngIf="showTableEmoji" class="segmentEmojiSection" [set]="'google'"
+                  (clickOutside)="showTableEmoji = false"
+                  (emojiSelect)="selectTableEmoji($event)" totalFrequentLines="1" skin="1"></emoji-mart>
+    </div>
+
+    <div class="tableColor tableLabel mb-5">
+      <p class="subTitle mediumFont fontSize16 lineHeight18 mainBlack mb-10"> Color </p>
+      <div class="selectColorDiv cursorPointer positionRelative" (click)="showColorDDM = !showColorDDM"
+           [ngClass]="{'activeColorDDM': showColorDDM }">
+        <div class="selectedColorIcon">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12.7817" cy="13.2119" r="12.5" [attr.fill]="selectedTableColor"/>
+          </svg>
+        </div>
+        <i class="dropDownIcon" [inlineSVG]="'assets/table/dropDownIconGray.svg'"></i>
+      </div>
+    </div>
+
+    <div class="selectTableColor" *ngIf="showColorDDM" (clickOutside)="showColorDDM = false">
+      <div class="tableColorPicker ml-0">
+        <span class="tableSingleColor cursorPointer" *ngFor="let fillColor of customColorPalette; let i=index"
+              (click)="onTableCustomColor(fillColor)">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="11" [attr.fill]="fillColor"/>
+          </svg>
+        </span>
+      </div>
+    </div>
+
+    <div class="addNewTableButtonSection displayFlex mt-110">
+      <div class="addNewTableButtonSection displayFlex">
+        <button class="mainSaveButtonBlue"
+                [disabled]="!newTableName || tableNameAlreadyExistsError || isAddNewTableLoading"
+                (click)="addNewTable(newTableName)">
+          <div class="buttonLoaderSection">
+            <app-spinner class="loaderImage mt-0 ml--5" *ngIf="isAddNewTableLoading"></app-spinner>
+            <span class="mediumFont"> Add </span>
+          </div>
+        </button>
+        <button class="mainCancelButtonBlue ml-15" (click)="resetAddNewTableModalData()">
+          <span class="mediumFont"> Cancel </span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</nz-modal>
+<!--RESET MODAL ENDS HERE-->
+
+
+<!--CREATE TABLE CLOSE ICON FOR MODAL STARTS HERE-->
+<ng-template #createTableModalCloseIcon>
+  <div class="customCloseIcon">
+    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M10.656 11.7734L6.60938 7.72801L2.56279 11.7734C2.45675 11.8799 2.33073 11.9644 2.19195 12.022C2.05317 12.0797 1.90437 12.1094 1.75409 12.1094C1.6038 12.1094 1.455 12.0797 1.31622 12.022C1.17744 11.9644 1.05142 11.8799 0.945385 11.7734V11.7734C0.838887 11.6673 0.754382 11.5413 0.69672 11.4025C0.639058 11.2637 0.609375 11.1149 0.609375 10.9647C0.609375 10.8144 0.639058 10.6656 0.69672 10.5268C0.754382 10.388 0.838887 10.262 0.945385 10.156L4.99074 6.10938L0.945385 2.06279C0.838887 1.95675 0.754382 1.83073 0.69672 1.69195C0.639058 1.55317 0.609375 1.40437 0.609375 1.25409C0.609375 1.1038 0.639058 0.955001 0.69672 0.816221C0.754382 0.677442 0.838887 0.551418 0.945385 0.445385V0.445385C1.05142 0.338887 1.17744 0.254382 1.31622 0.19672C1.455 0.139058 1.6038 0.109375 1.75409 0.109375C1.90437 0.109375 2.05317 0.139058 2.19195 0.19672C2.33073 0.254382 2.45675 0.338887 2.56279 0.445385L6.60938 4.49074L10.656 0.445385C10.762 0.338887 10.888 0.254382 11.0268 0.19672C11.1656 0.139058 11.3144 0.109375 11.4647 0.109375C11.6149 0.109375 11.7637 0.139058 11.9025 0.19672C12.0413 0.254382 12.1673 0.338887 12.2734 0.445385V0.445385C12.3799 0.551418 12.4644 0.677442 12.522 0.816221C12.5797 0.955001 12.6094 1.1038 12.6094 1.25409C12.6094 1.40437 12.5797 1.55317 12.522 1.69195C12.4644 1.83073 12.3799 1.95675 12.2734 2.06279L8.22801 6.10938L12.2734 10.156C12.3799 10.262 12.4644 10.388 12.522 10.5268C12.5797 10.6656 12.6094 10.8144 12.6094 10.9647C12.6094 11.1149 12.5797 11.2637 12.522 11.4025C12.4644 11.5413 12.3799 11.6673 12.2734 11.7734V11.7734C12.1673 11.8799 12.0413 11.9644 11.9025 12.022C11.7637 12.0797 11.6149 12.1094 11.4647 12.1094C11.3144 12.1094 11.1656 12.0797 11.0268 12.022C10.888 11.9644 10.762 11.8799 10.656 11.7734V11.7734Z"
+        fill="#888888"/>
+    </svg>
+  </div>
+</ng-template>
+<!--CREATE TABLE CLOSE ICON FOR MODAL ENDS HERE-->
+
+
+<!--DELETE MODAL STARTS HERE-->
+<nz-modal nzWrapClassName="deleteSegmentWrapper" nzClassName="deleteSegmentMainSection" [nzWidth]="500"
+          [(nzVisible)]="deleteSegmentModalVisible" (nzOnCancel)="deleteSegmentModalVisible = false">
+  <div class="deleteSegmentMainClass" *ngIf="segmentToBeDeleted">
+    <div class="segmentName segmentLabel mb-30">
+      <p class="subTitle mediumFont fontSize22 lineHeight22 mainBlack mb-10">
+        Are you sure you want to delete Segment "{{ segmentToBeDeleted.segmentName }}"?
+      </p>
+    </div>
+    <div class="deleteSegmentButtonSection displayFlex mt-50">
+      <div class="displayFlex">
+        <button class="mainSaveBlueButton" [disabled]="isDeleteSegmentLoading"
+                (click)="deleteSegmentFinal(segmentToBeDeleted.segmentId)">
+          <div class="buttonLoaderSection">
+            <app-spinner class="loaderImage mt-0 ml--5" *ngIf="isDeleteSegmentLoading"></app-spinner>
+            <span class="mediumFont"> Yes, delete </span>
+          </div>
+        </button>
+        <div class="mainCancelButton pt-5 ml-20" (click)="deleteSegmentModalVisible = false">
+          <span class="cursorPointer mediumFont fontSize14 lineHeight17 mainBlack"> No, don't delete </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</nz-modal>
+<!--DELETE MODAL ENDS HERE-->
+
+
+<!--VIEW DDM STARTS HERE-->
+<nz-dropdown-menu class="viewDDMWrapper" #viewMenuDDM="nzDropdownMenu">
+  <div class="viewDDMSection"
+       [ngClass]="{'activeListView': listView, 'activeGridView': !listView}" nz-menu>
+    <div class="viewDDMItem listView displayFlex regularFont fontSize14 lineHeight14 mainBlack cursorPointer"
+         nz-menu-item
+         (click)="updateSegmentView(1)"><i class="selectView mr-10" [inlineSVG]="'assets/table/listViewGray.svg'"></i>
+      List view
+    </div>
+    <div class="viewDDMItem gridView displayFlex regularFont fontSize14 lineHeight14 mainBlack cursorPointer"
+         nz-menu-item
+         (click)="updateSegmentView(2)"><i class="selectView mr-10" [inlineSVG]="'assets/table/gridViewGray.svg'"></i>
+      Grid view
+    </div>
+  </div>
+</nz-dropdown-menu>
+<!--VIEW DDM ENDS HERE-->

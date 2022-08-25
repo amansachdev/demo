@@ -1,0 +1,74 @@
+.ant-table {
+  background: transparent;
+}
+
+.groupByMainSection {
+  margin: 0px 100px 0px 105px;
+  min-height: 50px;
+  overflow: auto;
+  height: calc(90vh - 90px);
+}
+
+.groupByTableSection {
+  width: 100%;
+  min-width: 100%;
+  overflow-y: scroll;
+  min-height: 0px;
+  max-height: 200px
+}
+
+.groupByTableSection div {
+  display: flex;
+  border-bottom: none
+}
+
+.groupByTableSection div.groupByTD:last-child div.groupByDivision {
+  border-right: none
+}
+
+.groupByDivision {
+  border-right: 1px solid #CCCCCC;
+  border-bottom: 1px solid #CCCCCC;
+  padding: 5px 10px 5px 10px;
+  width: 150px;
+  height: 35px
+}
+
+.accordionCloseIcon {
+  position: absolute;
+  left: 10px;
+  top: 28px
+}
+
+.groupTitleAndCount {
+  /*position: absolute;
+  top: 28px;
+  left: 33px;
+  margin-left: 0px*/
+}
+
+.groupTitleAndCount .groupByTitle {
+  position: absolute;
+  top: 28px;
+  left: 33px;
+  margin-left: 0px
+}
+
+.groupTitleAndCount .groupByCount {
+  /*position: absolute;
+  top: 28px;
+  left: 33px;
+  margin-left: 0px*/
+}
+
+.groupByMainSection .accordionCloseIcon {
+  transform: rotate(-90deg)
+}
+
+.groupByMainSection .ant-collapse-item-active .accordionCloseIcon {
+  transform: rotate(0deg)
+}
+
+.groupByMainSection tbody tr td .groupByTableSection div:last-child div.groupByTD .groupByDivision {
+  border-bottom: none
+}

@@ -1,0 +1,149 @@
+<div class="displayFlex tableMenuItemsDiv mb-5" [ngStyle]="{'margin-left.px':105}"
+     [ngClass]="{'tableMenuFullView': tableMenuService.isFullScreen,
+     'fullScreenViewMenus': tableMenuService.isFullScreen}">
+
+  <div class="tableMenu mr-10 cursorPointer displayFlex" nzTrigger="click" nz-dropdown [nzDropdownMenu]="hideMenuDDM"
+       [nzClickHide]=false [ngClass]="{'tableMenuActiveClass': isHideDDMVisible}" [(nzVisible)]=isHideDDMVisible>
+    <span class="displayFlex" *ngIf="tableMenuService.totalColumnHidden == 0"><i
+      [inlineSVG]="'assets/table/hideGray.svg'"></i>
+      <span class="regularFont lineHeight18 fontSize14 mainBlack ml-10"> Hide field </span>
+    </span>
+
+    <span class="displayFlex" *ngIf="tableMenuService.totalColumnHidden !== 0"><i
+      [inlineSVG]="'assets/table/hideBlue.svg'"></i>
+      <span class="regularFont lineHeight18 fontSize14 mainBlue ml-10">
+        {{tableMenuService.totalColumnHidden}}
+        <span *ngIf="tableMenuService.totalColumnHidden === 1 then hideField else hideFields"></span>
+      </span>
+      <ng-template #hideField>field hidden</ng-template>
+      <ng-template #hideFields>fields hidden</ng-template>
+    </span>
+  </div>
+
+  <div #addFilterEl class="tableMenu mr-10 cursorPointer displayFlex" nzTrigger="click" nz-dropdown
+       [nzDropdownMenu]="filterMenuDDM" [nzClickHide]=false [(nzVisible)]=isFilterDDMVisible
+       [ngClass]="{'tableMenuActiveClass': isFilterDDMVisible}">
+    <i [inlineSVG]="'assets/table/filterGray.svg'" *ngIf="tableMenuService.filterFieldShow"></i>
+    <span *ngIf="tableMenuService.filterFieldShow" class="regularFont lineHeight18 fontSize14 mainBlack ml-10">
+      Add a filter </span>
+    <i [inlineSVG]="'assets/table/filterBlue.svg'" *ngIf="tableMenuService.oneFilterFieldShow"></i>
+    <span *ngIf="tableMenuService.oneFilterFieldShow" class="regularFont lineHeight18 fontSize14 mainBlue ml-10">
+      Added 1 filter </span>
+    <i [inlineSVG]="'assets/table/filterBlue.svg'" *ngIf="tableMenuService.twoFilterFieldShow"></i>
+    <span *ngIf="tableMenuService.twoFilterFieldShow" class="regularFont lineHeight18 fontSize14 mainBlue ml-10">
+      Added {{tableMenuService.totalColumnFilter}}
+      filters </span>
+  </div>
+
+<!--
+  <div class="tableMenu mr-12 cursorPointer displayFlex" nzTrigger="click" nz-dropdown [nzDropdownMenu]="groupByMenuDDM"
+       [nzClickHide]=false
+       [ngClass]="{'tableMenuActiveClass': tableMenuService.isGroupByDDMVisible, 'groupByActive': tableMenuService.oneGroupByFieldShow}"
+       [(nzVisible)]=tableMenuService.isGroupByDDMVisible>
+    <i [inlineSVG]="'assets/table/groupByGray.svg'" *ngIf="!tableMenuService.oneGroupByFieldShow"></i>
+    <span class="regularFont lineHeight18 fontSize14 mainBlack ml-10"
+          *ngIf="!tableMenuService.oneGroupByFieldShow"> Group by </span>
+    <i [inlineSVG]="'assets/table/groupByBlue.svg'" *ngIf="tableMenuService.oneGroupByFieldShow"></i>
+    <span class="regularFont lineHeight18 fontSize14 mainBlue ml-10" *ngIf="tableMenuService.oneGroupByFieldShow">
+      Grouped by 1 field </span>
+    &lt;!&ndash;<i [inlineSVG]="'assets/table/hideBlue.svg'" *ngIf="twoGroupByFieldShow"></i> <span *ngIf="twoGroupByFieldShow" class="regularFont lineHeight18 fontSize14 mainBlue ml-10"> Grouped by {{this.totalColumnGroupBy}} filters </span>&ndash;&gt;
+  </div>
+-->
+
+  <div class="tableMenu mr-10 cursorPointer displayFlex" nzTrigger="click" nz-dropdown [nzDropdownMenu]="sortByMenuDDM"
+       [nzClickHide]=false
+       [ngClass]="{'tableMenuActiveClass': isSortByDDMVisible, 'sortByActive': tableMenuService.sortActive}"
+       [(nzVisible)]=isSortByDDMVisible>
+    <i [inlineSVG]="'assets/table/sortGray.svg'" *ngIf="tableMenuService.sortActive === false"></i> <span
+    *ngIf="tableMenuService.sortActive === false"
+    class="regularFont lineHeight18 fontSize14 mainBlack ml-10"> Sort </span>
+    <i [inlineSVG]="'assets/table/sortBlue.svg'" *ngIf="tableMenuService.sortActive === true"></i>
+    <span class="sortByClass regularFont lineHeight18 fontSize14 mainBlue ml-10"
+          *ngIf="tableMenuService.sortActive === true"> Sorted by {{tableMenuService.columnNameSortBy}} </span>
+  </div>
+
+  <div class="tableMenu mr-9 cursorPointer displayFlex" nzTrigger="click" nz-dropdown
+       [nzDropdownMenu]="rowHeightMenuDDM" [nzClickHide]=true
+       [ngClass]="{'tableMenuActiveClass': isRowHeightDDMVisible}" [(nzVisible)]="isRowHeightDDMVisible"
+       *ngIf="hideRowHeightMenuItem">
+    <i [inlineSVG]="'assets/table/rowHeightGray.svg'" nz-tooltip nzTooltipTitle="Row Height" nzTooltipPlacement="top"
+       [nzTooltipTrigger]="'hover'" [nzTooltipOverlayClassName]="'tableMenuToolTip'"></i>
+  </div>
+
+  <div class="tableMenu mr-10 cursorPointer displayFlex">
+    <i [inlineSVG]="'assets/table/downloadGray.svg'" nz-tooltip nzTooltipTitle="Download" nzTooltipPlacement="top"
+       [nzTooltipTrigger]="'hover'" [nzTooltipOverlayClassName]="'tableMenuToolTip'"></i>
+  </div>
+
+  <div (click)="onFullScreenMode();" class="tableMenu mr-10 cursorPointer displayFlex">
+    <i [inlineSVG]="'assets/table/fullScreenGray.svg'" nz-tooltip nzTooltipTitle="Full Screen" nzTooltipPlacement="top"
+       [nzTooltipTrigger]="'hover'" [nzTooltipOverlayClassName]="'tableMenuToolTip'"></i>
+  </div>
+
+  <div class="tableMenu mr-10 cursorPointer displayFlex">
+    <i [inlineSVG]="'assets/table/shareScreenGray.svg'" nz-tooltip nzTooltipTitle="Share" nzTooltipPlacement="top"
+       [nzTooltipTrigger]="'hover'" [nzTooltipOverlayClassName]="'tableMenuToolTip'"></i>
+  </div>
+
+  <div class="tableMenu cursorContext mr-10 displayFlex">
+    <span class="regularFont lineHeight18 fontSize14 mainBlack mr-10">Wrap Cells</span>
+    <nz-switch class="cursorPointer" [(ngModel)]="tableMenuService.isWrapCellsEnabled"
+               (ngModelChange)="onChangeWrapCells(tableMenuService.isWrapCellsEnabled)"></nz-switch>
+  </div>
+
+</div>
+
+
+<!--Row Height DDM Section Starts-->
+<nz-dropdown-menu #rowHeightMenuDDM="nzDropdownMenu" nzNoAnimation>
+  <div class="tableMenuRowHeightSection" nz-menu>
+    <div nz-menu-item class="menuItemList displayFlex" (click)="rowShort()"
+         [ngClass]="{ 'activeRow' : tableMenuService.rowHeight.short }">
+      <i [inlineSVG]="'assets/table/rowHeightShortGray.svg'"></i>
+      <span class="regularFont fontSize14 lineHeight17 mainBlack ml-10 pt-0"> Short </span>
+    </div>
+    <div nz-menu-item class="menuItemList displayFlex" (click)="rowMedium()"
+         [ngClass]="{ 'activeRow' : tableMenuService.rowHeight.medium }">
+      <i [inlineSVG]="'assets/table/rowHeightMediumGray.svg'"></i>
+      <span class="regularFont fontSize14 lineHeight17 mainBlack ml-10 pt-0"> Medium </span>
+    </div>
+    <div nz-menu-item class="menuItemList displayFlex" (click)="rowTall()"
+         [ngClass]="{ 'activeRow' : tableMenuService.rowHeight.tall }">
+      <i [inlineSVG]="'assets/table/rowHeightTallGray.svg'"></i>
+      <span class="regularFont fontSize14 lineHeight17 mainBlack ml-10 pt-0"> Tall </span>
+    </div>
+    <div nz-menu-item class="menuItemList displayFlex" (click)="rowExtraTall()"
+         [ngClass]="{ 'activeRow' : tableMenuService.rowHeight.extraTall }">
+      <i [inlineSVG]="'assets/table/rowHeightExtraTallGray.svg'"></i>
+      <span class="regularFont fontSize14 lineHeight17 mainBlack ml-10 pt-0"> Extra Tall </span>
+    </div>
+  </div>
+</nz-dropdown-menu>
+<!--Row Height DDM Section Ends-->
+
+
+<!--Hide Menu DDM Section Starts-->
+<nz-dropdown-menu #hideMenuDDM="nzDropdownMenu" nzNoAnimation>
+  <app-hide-field *ngIf="isHideDDMVisible"></app-hide-field>
+</nz-dropdown-menu>
+<!--Hide Menu DDM Section Ends-->
+
+
+<!--Sort By DDM Section Starts-->
+<nz-dropdown-menu #sortByMenuDDM="nzDropdownMenu" nzNoAnimation>
+  <app-sort-by *ngIf="isSortByDDMVisible"></app-sort-by>
+</nz-dropdown-menu>
+<!--Sort By DDM Section Ends-->
+
+
+<!--Group By DDM Section Ends-->
+<nz-dropdown-menu #groupByMenuDDM="nzDropdownMenu" nzNoAnimation>
+  <app-group-by-menu *ngIf="tableMenuService.isGroupByDDMVisible"></app-group-by-menu>
+</nz-dropdown-menu>
+<!--Group By DDM Section Ends-->
+
+<!--Add Filter DDM Section Starts-->
+<nz-dropdown-menu #filterMenuDDM="nzDropdownMenu" nzNoAnimation>
+  <app-add-filter *ngIf="isFilterDDMVisible"></app-add-filter>
+</nz-dropdown-menu>
+<!--Add Filter DDM Section Ends-->

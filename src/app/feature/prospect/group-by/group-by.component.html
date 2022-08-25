@@ -1,0 +1,114 @@
+<div class="groupByMainSection positionRelative" *ngIf="isGroupByTableLoaded">
+  <div *ngFor="let group of prospectService.groupedBYData">
+    <!--<app-hands-on-table
+      [hotId]="group.propertyFieldValue"
+      [colSet]="prospectService.prospectColumn"
+      [dataSet]="group.filteredData"></app-hands-on-table>-->
+    <nz-collapse nzAccordion class="positionRelative" >
+      <nz-collapse-panel [nzHeader]="tableMenuService.columnNameGroupBy" class="positionRelative"
+                          [nzExpandedIcon]="groupByAccordionIcon">
+        <div class="groupTitleAndCount displayFlex">
+          <span class="groupByTitle semiBoldFont fontSize14 lineHeight17 mainBlack mr-10">{{group.propertyFieldValue}}</span>
+          <span class="groupByCount regularFont fontSize12 lineHeight17 mainBlack pt-1">Count: {{group.filteredData.length}}</span>
+        </div>
+        <hot-table [data]="group.filteredData" [hotId]="group.propertyFieldValue">
+          <ng-container *ngFor="let column of prospectService.prospectColumn; let i = index" [ngSwitch]="column.type">
+            <hot-column *ngSwitchCase="'textonly'"
+                        [type]="'text'"
+                        [data]="column.field"
+                        [colWidths]="column.width"
+                        [renderer]="validatorRenderer"
+                        [className]="'textTd'"
+                        [validator]="textValidator"
+                        [title]="prospectService.getSVGIcon(column.field)+'&nbsp;'+column.title"></hot-column>
+
+            <hot-column *ngSwitchCase="'text'"
+                        [type]="'text'"
+                        [data]="column.field"
+                        [colWidths]="column.width"
+                        [className]="'textTd'"
+                        [title]="prospectService.getSVGIcon(column.field)+'&nbsp;'+column.title"></hot-column>
+
+            <hot-column *ngSwitchCase="'email'"
+                        [type]="'text'"
+                        [data]="column.field"
+                        [colWidths]="column.width"
+                        [className]="'emailTd'"
+                        [renderer]="validatorRenderer"
+                        [validator]="emailValidator"
+                        [title]="prospectService.SVGIcon.email+'&nbsp;'+column.title"></hot-column>
+
+            <hot-column *ngSwitchCase="'url'"
+                        [type]="'text'"
+                        [data]="column.field"
+                        [colWidths]="column.width"
+                        [className]="'urlTd'"
+                        [renderer]="validatorRenderer"
+                        [validator]="urlValidator"
+                        [title]="prospectService.SVGIcon.url+'&nbsp;'+column.title"></hot-column>
+
+            <hot-column *ngSwitchCase="'number'"
+                        [type]="'numeric'"
+                        [data]="column.field"
+                        [colWidths]="column.width"
+                        [className]="'numberTd'"
+                        [renderer]="validatorRenderer"
+                        [title]="prospectService.getSVGIcon(column.field)+'&nbsp;'+column.title"></hot-column>
+
+            <hot-column *ngSwitchCase="'date'"
+                        [type]="'date'"
+                        [data]="column.field"
+                        [colWidths]="column.width"
+                        [className]="'dateTd'"
+                        [correctFormat]="true"
+                        [renderer]="validatorRenderer"
+                        [readOnly]="true"
+                        [dateFormat]="'DD/MM/YY HH:MM:SS'"
+                        [title]="prospectService.SVGIcon.date+'&nbsp;'+column.title"></hot-column>
+
+            <hot-column *ngSwitchCase="'singleSelectTag'"
+                        [data]="column.field"
+                        [colWidths]="column.width"
+                        [readOnly]="true"
+                        [title]="prospectService.SVGIcon.tag+'&nbsp;'+column.title"
+                        [renderer]="singleSelectTagsRenderer"
+                        [className]="'singleSelectTd'"></hot-column>
+
+            <hot-column *ngSwitchCase="'multiSelectTag'"
+                        [data]="column.field"
+                        [colWidths]="column.width"
+                        [readOnly]="true"
+                        [title]="prospectService.SVGIcon.multiSelect+'&nbsp;'+column.title"
+                        [renderer]="multiSelectTagsRenderer"
+                        [className]="'singleSelectTd'"></hot-column>
+
+            <hot-column *ngSwitchCase="'multiLineText'"
+                        [data]="column.field"
+                        [colWidths]="column.width"
+                        [readOnly]="true"
+                        [type]="'text'"
+                        [className]="'multiLineTextTd'"
+                        [renderer]="multiLineTextRenderer"
+                        [title]="prospectService.SVGIcon.text+'&nbsp;'+column.title"></hot-column>
+
+          </ng-container>
+        </hot-table>
+      </nz-collapse-panel>
+    </nz-collapse>
+
+    <ng-template #groupByAccordionIcon>
+      <div class="accordionCloseIcon"><i>
+        <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M7.60778 7.8009L13.7485 1.68114C14.0838 1.32485 14.0838 0.779941 13.7485 0.444612C13.4132 0.109283 12.8473 0.109283 12.512 0.444612L7 5.95659L1.48802 0.444612C1.13174 0.109283 0.586826 0.109283 0.251497 0.444612C-0.0838323 0.779941 -0.0838323 1.32485 0.251497 1.68114L6.37126 7.8009C6.72755 8.13623 7.27246 8.13623 7.60778 7.8009Z"
+                fill="#888888"/>
+        </svg>
+      </i></div>
+    </ng-template>
+
+  </div>
+</div>
+
+<div class="groupBySkeletonSection" *ngIf="!isGroupByTableLoaded">
+  <app-skeleton></app-skeleton>
+</div>

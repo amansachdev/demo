@@ -1,0 +1,64 @@
+.skeletonTableSkeletonMainWrapper {
+  margin-top: -40px;
+  overflow: hidden;
+}
+
+.skeletonTable {
+  width: 97%;
+  margin-left: 5px;
+  background-color: transparent;
+  border-collapse: separate;
+  border-spacing: 0 50px;
+}
+
+.skeletonTable thead tr {
+  box-shadow: 0 0 6.4px 4px rgba(0, 0, 0, .06275);
+  border-radius: 4px;
+}
+
+.skeletonTable tbody tr {
+  box-shadow: 0 0 6.4px 4px rgba(0, 0, 0, .06275);
+  border-radius: 4px;
+  background-color: #FFFFFF;
+}
+
+.skeletonTable .skeletonTableHeader th {
+  color: #495057;
+  background-color: #f8f8f9;
+  border-color: #f8f8f9;
+  border-radius: 4px;
+}
+
+.skeletonTable thead th {
+  vertical-align: bottom;
+}
+
+.skeletonTable td,
+.skeletonTable th {
+  padding: 15px 10px 15px 10px;
+  border: none;
+}
+
+.skeletonWave {
+  height: 12px;
+  width: 80%;
+  margin: 4px 0;
+  border-radius: 8px;
+  animation-duration: 1.4s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: tableskeletonshimmer;
+  animation-timing-function: linear;
+  position: relative;
+  background: linear-gradient(90deg, #f2f2f2 25%, #e6e6e6 37%, #f2f2f2 63%);
+  background-size: 400% 100%;
+}
+
+@keyframes tableskeletonshimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}

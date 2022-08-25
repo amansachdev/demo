@@ -1,0 +1,203 @@
+<div class="tableMenuFilterSection customScrollbar" nz-menu>
+
+  <div class="tableMenuFilterSectionMinHeight customScrollbar pr-20">
+    <!-- Filter Section With Text Where Starts -->
+    <div class="filterMainSection displayFlex mb-0" *ngFor="let filter of filterArray; let filterIndex = index;">
+
+      <!--Filter Where Text Section Left Clear Button-->
+      <div class="filterClearSection mr-15 mt-8 cursorPointer">
+        <i [inlineSVG]="'assets/table/clearGray.svg'" (click)="popFilter(filterIndex)"></i>
+      </div>
+
+      <!--Filter Where Text Section -->
+      <div class="filterTextSection noHover width-40 mr-15 mt-8" *ngIf="filterIndex === 0">
+        <span class="regularFont fontSize14 lineHeight18 mainBlack">Where</span>
+      </div>
+
+      <!--Filter And/Or Text Selected AndOr DDM Section-->
+      <div class="filterTextSection width-40 cursorPointer mr-15 mt-5" *ngIf="filterIndex > 0"
+           (click)="toggleAndOr(filterIndex)" (clickOutside)="isAndOrVisible = false"
+           [ngClass]="{'andOrDDMExtended': true, 'andOrDropdownOpen': isAndOrVisible}">
+        <div class="displayFlex cursorPointer">
+          <span class="regularFont fontSize14 lineHeight17 mainBlack cursorPointer mt-5 mr-5"> {{andOrStatus}} </span>
+          <i *ngIf="filterArray.length === 2">
+            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M5.43413 5.43413L9.82036 1.06287C10.0599 0.808383 10.0599 0.419161 9.82036 0.179641C9.58084 -0.0598802 9.17665 -0.0598802 8.93713 0.179641L5 4.11676L1.06287 0.179641C0.808383 -0.0598802 0.419162 -0.0598802 0.179641 0.179641C-0.0598802 0.419161 -0.0598802 0.808383 0.179641 1.06287L4.5509 5.43413C4.80539 5.67365 5.19461 5.67365 5.43413 5.43413Z"
+                    fill="#888888"/>
+            </svg>
+          </i>
+        </div>
+      </div>
+
+      <!--Filter And/Or Text DDM Section-->
+      <div *ngIf="isAndOrVisible && openedFilterIndex == filterIndex">
+        <div class="andOrDropdownSection">
+          <div *ngFor="let data of andOr">
+            <div class="andOrFilterItem cursorPointer regularFont fontSize14 lineHeight17 mainBlack"
+                 (click)="onFilterAndOr(data, filterIndex); additionalFilters()"
+                 [ngClass]="{'activeAndOrClass': andOrStatus == data}">
+              {{data}} </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Filter Where Text Selected Column Section -->
+      <div class="filterSelectedValueSection cursorPointer positionRelative mr-15"
+           (click)="displayColumnListDDM(filterIndex)"
+           (clickOutside)="filter.showColDDM = false; setDefaultFilter(filterIndex)">
+        <div class="filterSelectedIcon mr-5 mt--2" *ngIf="filter.hideIconOnFocus">
+          <i [inlineSVG]="filter.selectedCol.icon" (click)="displayColumnListDDM(filterIndex)"></i>
+        </div>
+        <input type="text" class="filterSelectedData cursorPointer mainBlack fontSize14"
+               [(ngModel)]="filter.selectedCol.name" #filterColumnInputField
+               (click)="hideFocus(filterIndex)" (focusin)="filter.hideIconOnFocus = false"
+               (focusout)="filter.hideIconOnFocus = true">
+        <div class="filterDropdownIcon" *ngIf="filter.hideIconOnFocus">
+          <i [inlineSVG]="'assets/table/dropdownIconBlue.svg'" (click)="displayColumnListDDM(filterIndex)"></i>
+        </div>
+      </div>
+
+      <!--Filter Where Text Select Column DDM Section -->
+      <div *ngIf="filter.showColDDM">
+        <div class="columnNameDropDownSection customScrollbar"
+             [ngClass]="{'visibilityNone': (tableMenuService.prospectColumn | columnFilter: filter.selectedCol.name )}">
+          <div class="dataLists"
+            *ngFor="let col of tableMenuService.prospectColumn | columnFilter: filter.selectedCol.name;
+            let columnIndex = index">
+            <div class="columnNameFilterItem cursorPointer displayFlex"
+                 *ngIf="columnIndex != 0"
+                 (click)="updateColumnName(col, filterIndex, columnIndex);additionalFilters()">
+              <i class="mr-5" [inlineSVG]="col.icon"></i>
+              <span
+                class="regularFont fontSize14 lineHeight17 whiteSpaceNoWrap mainBlack overflowHidden textEllipsis pt-3"> {{col.title}} </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Filter Where Text Column Error Section -->
+      <div *ngIf="(tableMenuService.prospectColumn | columnFilter: filter.selectedCol.name )== ''">
+        <div class="columnListError">
+          <div class="columnListInvalidSearchSection">
+            <div class="invalidSearchResult textAlignLeft">
+              <p class="regularFont fontSize14 lineHeight17 mainBlack pb-14"> No field types or tables names matching
+                " {{filter.selectedCol.name}} ". Click on clear to search again </p>
+              <p
+                class="clearSearch cursorPointer semiBoldFont fontSize14 lineHeight17 mainBlue mb-0 widthFitContent floatLeft"
+                (click)="filter.selectedCol.name = ''"> Clear </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Filter Where Text Condition Selected Section -->
+      <div class="filterSelectedContainsSection positionRelative cursorPointer mr-15"
+           (click)="displayContainsListDDM(filterIndex);" (clickOutside)="filter.showContainsDDM = false"
+           [ngClass]="{'filterSectionExtended' : false, 'containsList': filter.showContainsDDM}">
+        <div class="filterSelectData whiteSpaceNoWrap overflowHidden textEllipsis mt--4">
+          <span class="regularFont fontSize14 lineHeight18 mainBlack"> {{filter.contains}} </span>
+        </div>
+        <div class="filterDropdownIcon positionAbsolute mt--2">
+          <!--<i [inlineSVG]="'assets/table/dropdownIconGray.svg'"></i>-->
+          <i>
+            <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M7.60778 7.8009L13.7485 1.68114C14.0838 1.32485 14.0838 0.779941 13.7485 0.444612C13.4132 0.109283 12.8473 0.109283 12.512 0.444612L7 5.95659L1.48802 0.444612C1.13174 0.109283 0.586826 0.109283 0.251497 0.444612C-0.0838323 0.779941 -0.0838323 1.32485 0.251497 1.68114L6.37126 7.8009C6.72755 8.13623 7.27246 8.13623 7.60778 7.8009Z"
+                    fill="#888888"/>
+            </svg>
+          </i>
+        </div>
+      </div>
+
+      <!--Filter Where Text Condition DDM Section -->
+      <div *ngIf="filter.showContainsDDM">
+        <div class="containsDropDownSection">
+          <div *ngFor="let contain of filter.containsArray">
+            <div
+              class="containsFilterItem cursorPointer regularFont fontSize14 lineHeight17 whiteSpaceNoWrap mainBlack overflowHidden textEllipsis"
+              nz-menu (click)="updateCondition(contain, filterIndex); additionalFilters()"> {{contain}} </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Filter Where Text Condition Error Section -->
+      <div *ngIf="showContainsError">
+        <div class="containsListError">
+          <div class="containsListInvalidSearchSection">
+            <div class="invalidSearchResult textAlignLeft">
+              <p class="regularFont fontSize14 lineHeight17 mainBlack pb-14"> No field types or tables names matching "
+                dsadasd ". Click on clear to search again </p>
+              <p
+                class="clearSearch cursorPointer semiBoldFont fontSize14 lineHeight17 mainBlue mb-0 widthFitContent floatLeft">
+                Clear </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!(filter.contains == 'Date ranges')">
+        <!--Filter Where Text Input Field Section -->
+        <div class="filterInputSection placeHolder" (click)="displayFilterSearchResult(filterIndex)"
+             (clickOutside)="filter.showSearchDataDDm = false">
+          <input type="text" placeholder="Type to search"
+                 [disabled]="filter.contains == 'Is Empty' || filter.contains == 'Is Not Empty' || filter.contains === 'Date ranges'"
+                 [(ngModel)]="filter.searchFilter.searchFilterText"
+                 (keyup)="onKeySearch($event, filter.searchFilter.searchFilterText, filterIndex);">
+        </div>
+
+        <!--Filter Where Text Input Field DDM Section -->
+        <div
+          *ngIf="filter.showSearchDataDDm && !(filter.contains == 'Is Empty' || filter.contains == 'Is Not Empty') || filter.contains === 'Date ranges'">
+          <div class="showFilterResultSection customScrollbar mt-0">
+            <div class="dataLists"
+              *ngFor="let data of filter.searchFilter.searchFilterArray | arrayFilter: filter.searchFilter.searchFilterText ">
+              <div
+                class="filterResultItem cursorPointer regularFont fontSize14 lineHeight17 whiteSpaceNoWrap mainBlack overflowHidden textEllipsis"
+                (click)="updateSearchData(data, filterIndex); additionalFilters()"> {{data}} </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div *ngIf="filter.contains == 'Date ranges'">
+        <nz-range-picker [nzDateRender]="tplRender" [(ngModel)]="filter.dater" [nzFormat]="dateFormatForFilter"
+                         (ngModelChange)="updateDateForFilter(filterIndex);additionalFilters()"></nz-range-picker>
+
+        <ng-template #tplRender let-current>
+          <div class="ant-picker-cell-inner" [class.border]="current.getDate() === 1">
+            {{ current.getDate()}}
+          </div>
+        </ng-template>
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <!-- Filter Bottom Button Section Starts -->
+  <div class="bottomButtonSection mt-50">
+    <div class="displayInlineFlex width_100">
+      <div class="width_100">
+        <button class="tableMenuBlueButton mr-15" [disabled]="isSaveButtonDisabled" (click)="addAndUpdateFilter()">
+          <div class="buttonLoaderSection">
+            <app-spinner class="loaderImage mt-0 ml--5" *ngIf="isLoading"></app-spinner>
+            <span class="regularFont fontSize14"> Add Filter </span>
+          </div>
+        </button>
+      </div>
+
+      <div class="bottomButtonSection mt-4 pr-20" (click)="resetToDefault()">
+        <button class="resetToDefault textAlignCenter addFilterButton cursorPointer ml-8"
+                [disabled]="tableMenuService.isDisabled"> Reset to default
+        </button>
+      </div>
+
+      <!--<div class="resetToDefaultDiv textAlignRight width_100 pt-6 pr-20" (click)="resetToDefault()"> <span class="regularFont fontSize14 lineHeight14 mainBlack cursorPointer pt-10"> Reset to default </span> </div>-->
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,94 @@
+<div class="profileSection" nz-menu>
+  <div class="profileAccountActive textAlignCenter">
+    <div class="userPicUploadSection mb-10">
+      <img src="assets/table/activeUser.svg">
+      <div class="profileUploadIcon" (mouseenter)="onProfileImg()" (mouseleave)="outProfileImg()">
+        <img class="uploads" [src]="profilePicImg">
+      </div>
+    </div>
+    <h2> Jas Arora </h2>
+    <p> jas@alore.io </p>
+    <button class="blueBorderButton"> Manage your Profile</button>
+  </div>
+  <div class="profileAllAccount">
+    <div class="displayInlineFlex profileHover" (mouseenter)="showSignout()" (mouseleave)="hideSignout()">
+      <div class="allUserPic">
+        <img class="mr-20" src="assets/table/userIcon.svg">
+      </div>
+      <div class="allUsersName">
+        <h3> Jas Arora </h3>
+        <p> jas@alore.io </p>
+      </div>
+      <div class="allUsersSignout" [hidden]="!signoutVisible">
+        <p class="text"> sign out </p>
+      </div>
+    </div>
+    <div class="displayInlineFlex profileHover" (mouseenter)="showSignout1()" (mouseleave)="hideSignout1()">
+      <div class="allUserPic">
+        <img class="mr-20" src="assets/table/userIcon.svg">
+      </div>
+      <div class="allUsersName">
+        <h3> Jas Arora </h3>
+        <p> jas@alore.io </p>
+      </div>
+      <div class="allUsersSignout" [hidden]="!signoutVisible1">
+        <p class="text"> sign out </p>
+      </div>
+    </div>
+    <div class="displayInlineFlex profileHover" (mouseenter)="showSignout2()" (mouseleave)="hideSignout2()">
+      <div class="allUserPic">
+        <img class="mr-20" src="assets/table/userIcon.svg">
+      </div>
+      <div class="allUsersName">
+        <h3> Jas Arora </h3>
+        <p> jas@alore.io </p>
+      </div>
+      <div class="allUsersSignout" [hidden]="!signoutVisible2">
+        <p class="text"> sign out </p>
+      </div>
+    </div>
+    <div class="displayInlineFlex profileHover" (mouseenter)="showSignout3()" (mouseleave)="hideSignout3()">
+      <div class="allUserPic">
+        <img class="mr-20" src="assets/table/userIcon.svg">
+      </div>
+      <div class="allUsersName">
+        <h3> Jas Arora </h3>
+        <p> jas@alore.io </p>
+      </div>
+      <div class="allUsersSignout" [hidden]="!signoutVisible3">
+        <p class="text"> sign out </p>
+      </div>
+    </div>
+    <div class="displayInlineFlex profileHover" (mouseenter)="showSignout4()" (mouseleave)="hideSignout4()">
+      <div class="allUserPic">
+        <img class="mr-20" src="assets/table/userIcon.svg">
+      </div>
+      <div class="allUsersName">
+        <h3> Jas Arora </h3>
+        <p> jas@alore.io </p>
+      </div>
+      <div class="allUsersSignout" [hidden]="!signoutVisible4">
+        <p class="text"> sign out </p>
+      </div>
+    </div>
+  </div>
+  <div class="profileAddAnother" (mouseenter)="onAddUserImg()" (mouseleave)="outAddUserImg()">
+    <div class="displayInlineFlex">
+      <div class="addUserPic">
+        <img class="mr-20" [src]="addUserImg">
+      </div>
+      <div class="addAnotherAccount">
+        <h3> Add another account </h3>
+      </div>
+    </div>
+  </div>
+  <div class="profileAccountBottom textAlignCenter">
+    <div class="profileSignout">
+      <button class="blueBorderButton" (click)="signOut()"> Sign out of all account</button>
+    </div>
+    <div class="profileFooterTextSection">
+      <a href="https://www.alore.io/privacy-policy" target="_blank"> Privacy Policy </a>
+      <a href="https://www.alore.io/terms-of-service" target="_blank"> Terms of Services </a>
+    </div>
+  </div>
+</div>

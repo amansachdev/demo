@@ -1,0 +1,6 @@
+<div [froalaEditor]="froalaEditorConfig" [(froalaModel)]="froalaEditorContent"></div>
+<br>
+<div class="textAlignRight">
+  <button class="froalaSubmitButton" [disabled]="!isContentChanged" (click)="onSubmit()">Submit</button>
+  <button class="froalaCancelButton" (click)="onCancel()">Cancel</button>
+</div>
